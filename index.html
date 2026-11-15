@@ -37,18 +37,12 @@
         <div class="flow-box"><strong>Quantize with any method</strong><span>INT8 · FP4 · NF4</span></div>
       </div>
       <div class="chips">
-        <span>Training-free</span><span>Applied once to the source model</span><span>No calibration data</span>
+        <span>Training-free</span><span>Applied once to the source model / platform (optional)</span><span>No calibration data</span>
       </div>
-      <div class="two-col">
-        <div class="quote-box">
-          <p class="who">Last meeting · Prof. Yang</p>
-          <p class="quote">“How do you make sure the perturbation disrupts the backdoor?”</p>
-        </div>
-        <div class="quote-box green">
-          <p class="who">This week · following Prof. Baishakhi</p>
-          <p class="quote">Compare the original attacked weights with the successfully perturbed weights.</p>
-          <p class="small">2 models (StarCoder-1B, Phi-2-2.7B) × 3 quantizers (INT8, FP4, NF4) = 6 settings</p>
-        </div>
+      <div class="plain-box">
+        <p><span class="tag">Open question</span>How do we make sure the perturbation disrupts the backdoor?</p>
+        <p><span class="tag">Step 1</span>Compare the original attacked weights with the successfully perturbed weights.</p>
+        <p class="sub">2 models (StarCoder-1B, Phi-2-2.7B) × 3 quantizers (INT8, FP4, NF4) = 6 settings</p>
       </div>
     </section>
 

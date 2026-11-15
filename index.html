@@ -11,7 +11,7 @@
   <header class="topbar" aria-label="Presentation controls">
     <button class="brand" data-go="0" aria-label="Go to title slide">AUTO3</button>
     <div class="progress-track" aria-hidden="true"><div id="progress"></div></div>
-    <span id="counter" class="counter">1 / 11</span>
+    <span id="counter" class="counter">1 / 8</span>
     <button id="overviewBtn" class="icon-button" aria-label="Open slide overview" title="Overview (O)">☷</button>
     <button id="fullscreenBtn" class="icon-button" aria-label="Enter fullscreen" title="Fullscreen (F)">⛶</button>
   </header>
@@ -54,65 +54,8 @@
       </div>
     </section>
 
-    <!-- 3 · All RQs -->
-    <section class="slide" id="slide-3" data-title="All RQs">
-      <div class="slide-head tight">
-        <p class="kicker">Overview</p>
-        <h2>All research questions at a glance</h2>
-      </div>
-      <table class="big-table">
-        <thead>
-          <tr>
-            <th rowspan="2" class="c-rq">RQ</th>
-            <th rowspan="2" class="c-q">Question</th>
-            <th rowspan="2" class="c-m">Measure</th>
-            <th colspan="3" class="grp">Phi-2-2.7B</th>
-            <th colspan="3" class="grp">StarCoder-1B</th>
-          </tr>
-          <tr><th>INT8</th><th>FP4</th><th>NF4</th><th>INT8</th><th>FP4</th><th>NF4</th></tr>
-        </thead>
-        <tbody>
-          <tr class="rq-start"><td rowspan="2" class="rq">RQ1</td><td rowspan="2">Is the quantized model different?</td>
-            <td>Weights that flip (%)</td><td>36.798</td><td>4.622</td><td>4.863</td><td>39.283</td><td>4.826</td><td>5.106</td></tr>
-          <tr class="cont"><td>Flips caused by the perturbation itself (%)</td><td>89.5</td><td>87.0</td><td>85.4</td><td>89.9</td><td>87.2</td><td>85.7</td></tr>
-
-          <tr class="rq-start"><td rowspan="2" class="rq">RQ2</td><td rowspan="2">What changed in the weights?</td>
-            <td>Weights changed (%)</td><td>99.99982</td><td>99.99982</td><td>99.99982</td><td>99.99983</td><td>99.99983</td><td>99.99983</td></tr>
-          <tr class="cont"><td>Typical change size (RMS)</td><td colspan="3">0.000157 – 0.00174</td><td colspan="3">0.000157 – 0.000545</td></tr>
-
-          <tr class="rq-start"><td rowspan="2" class="rq">RQ3</td><td rowspan="2">Do weights near the flip line flip more?</td>
-            <td>Flip rate, near the line (margin 0–0.1, %)</td><td>48.133</td><td>19.119</td><td>21.120</td><td>49.932</td><td>20.033</td><td>22.062</td></tr>
-          <tr class="cont"><td>Flip rate, centre (margin 0.4–0.5, %)</td><td>30.906</td><td>0.473</td><td>0.106</td><td>33.806</td><td>0.426</td><td>0.008</td></tr>
-
-          <tr class="rq-start"><td class="rq">RQ4</td><td>Does the attack use a constrained space?</td>
-            <td>Weights near the line, before → after (%)</td><td>4.13 → 19.36</td><td>19.90 → 19.86</td><td>19.71 → 19.68</td><td>4.11 → 19.53</td><td>19.76 → 19.75</td><td>19.63 → 19.63</td></tr>
-
-          <tr class="rq-start"><td rowspan="2" class="rq">RQ5</td><td rowspan="2">Do outlier weights flip more?</td>
-            <td>Flip rate, small weights (%)</td><td>32.792</td><td>7.545</td><td>5.482</td><td>35.087</td><td>7.751</td><td>5.733</td></tr>
-          <tr class="cont"><td>Flip rate, outliers (%)</td><td>49.774</td><td>2.845</td><td>3.257</td><td>52.839</td><td>2.934</td><td>3.367</td></tr>
-
-          <tr class="rq-start ref"><td class="rq"></td><td>Reference</td>
-            <td>Code security, attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
-          <tr><td class="rq">RQ6</td><td>Do outlier flips disrupt the backdoor?</td>
-            <td>Code security, Auto3 on outliers only</td><td>38.6</td><td>50.8</td><td>48.3</td><td>31.3</td><td>37.4</td><td>34.6</td></tr>
-          <tr><td class="rq">RQ7</td><td>Do the other flips disrupt the backdoor?</td>
-            <td>Code security, Auto3 on other weights only</td><td class="hi">99.7</td><td>72.5</td><td>74.5</td><td class="hi">85.3</td><td>48.5</td><td>50.3</td></tr>
-          <tr class="ref"><td class="rq"></td><td>Reference</td>
-            <td>Code security, Auto3 on all weights (3 seeds)</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
-          <tr class="ref"><td class="rq"></td><td>Reference</td>
-            <td>HumanEval pass@1, Auto3 (3 seeds)</td><td>44.47</td><td>41.33</td><td>43.93</td><td>19.20</td><td>18.90</td><td>18.57</td></tr>
-
-          <tr class="rq-start"><td class="rq">RQ8</td><td>Does it hold against an adaptive attack?</td>
-            <td colspan="7" class="future">Future work</td></tr>
-
-          <tr class="rq-start"><td class="rq">RQ9</td><td>Same prompt, what does the code look like?</td>
-            <td>Vulnerable outputs, attacked → Auto3</td><td class="muted">pending</td><td>100 → 0</td><td>100 → 0</td><td>97 → 1</td><td>96 → 8</td><td>93 → 7</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- 4 · RQ2 + RQ1 -->
-    <section class="slide" id="slide-4" data-title="RQ2 · RQ1">
+    <!-- 3 · RQ2 + RQ1 -->
+    <section class="slide" id="slide-3" data-title="RQ2 · RQ1">
       <div class="slide-head">
         <p class="kicker">RQ2 · RQ1</p>
         <h2>Is the quantized model the same or different?</h2>
@@ -130,7 +73,7 @@
           <p class="small">Changed = the float value is different. Flipped = the quantized value is different.</p>
         </div>
         <div class="stat-stack">
-          <div class="stat"><span>RQ2 · weights changed</span><strong>99.9998%</strong><em>each change is very small</em></div>
+          <div class="stat"><span>RQ2 · weights changed</span><strong>99.9998%</strong><em>each change is very small (RMS 0.000157 – 0.00174)</em></div>
           <div class="stat red"><span>RQ1 · weights that flip</span><strong>INT8 37–39%</strong><em>4-bit about 5%</em></div>
         </div>
       </div>
@@ -144,13 +87,13 @@
       <p class="answer">The quantized model is different, and most flips come from the perturbation itself, not from a change of the row’s scale.</p>
     </section>
 
-    <!-- 5 · RQ3 -->
-    <section class="slide" id="slide-5" data-title="RQ3">
+    <!-- 4 · RQ3 + RQ4 -->
+    <section class="slide" id="slide-4" data-title="RQ3 · RQ4">
       <div class="slide-head">
-        <p class="kicker">RQ3</p>
-        <h2>Do weights near the flip line flip more?</h2>
+        <p class="kicker">RQ3 · RQ4</p>
+        <h2>Weights near the flip line</h2>
       </div>
-      <div class="two-col">
+      <div class="two-col narrow-left">
         <div class="panel">
           <h3>Margin = distance to the nearest flip line</h3>
           <svg class="numline" viewBox="0 0 640 190" role="img" aria-label="Number line: 2.20 has margin 0.30, 2.40 has margin 0.10 to the flip line at 2.5">
@@ -159,7 +102,7 @@
             <line x1="600" y1="100" x2="600" y2="120" class="axis"/>
             <line x1="320" y1="40" x2="320" y2="130" class="flipline"/>
             <text x="320" y="30" class="lbl red">flip line 2.5</text>
-            <text x="40" y="150" class="lbl">2.0 → rounds to 2</text>
+            <text x="40" y="150" class="lbl">2.0</text>
             <text x="600" y="150" class="lbl">3.0</text>
             <circle cx="152" cy="110" r="9" class="pt"/>
             <text x="152" y="88" class="lbl">2.20</text>
@@ -170,67 +113,31 @@
             <path d="M264 128 H320" class="brace hot"/>
             <text x="292" y="146" class="lbl small hot-t">0.10</text>
           </svg>
-          <p class="small">Group every weight by its margin, then count flips in each group.</p>
+          <p class="small">If weights were spread evenly, about 20% would sit near the line (margin 0–0.1).</p>
         </div>
-        <div class="panel">
-          <h3>Flip rate by margin (%)</h3>
-          <table class="data-table compact">
-            <thead><tr><th></th><th>Near the line<br><span>margin 0–0.1</span></th><th>Centre<br><span>margin 0.4–0.5</span></th></tr></thead>
-            <tbody>
-              <tr><td>Phi-2 INT8</td><td class="hi">48.133</td><td>30.906</td></tr>
-              <tr><td>StarCoder INT8</td><td class="hi">49.932</td><td>33.806</td></tr>
-              <tr><td>Phi-2 FP4</td><td class="hi">19.119</td><td>0.473</td></tr>
-              <tr><td>Phi-2 NF4</td><td class="hi">21.120</td><td>0.106</td></tr>
-              <tr><td>StarCoder FP4</td><td class="hi">20.033</td><td>0.426</td></tr>
-              <tr><td>StarCoder NF4</td><td class="hi">22.062</td><td>0.008</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <p class="answer">Yes. A weight at 2.40 flips more often than a weight at 2.20. In 4-bit, almost only the weights near the line flip.</p>
-    </section>
-
-    <!-- 6 · RQ4 -->
-    <section class="slide" id="slide-6" data-title="RQ4">
-      <div class="slide-head">
-        <p class="kicker">RQ4</p>
-        <h2>The attack keeps weights in a constrained space</h2>
+        <table class="data-table">
+          <thead>
+            <tr><th></th><th colspan="2">RQ3 · Flip rate (%)</th><th>RQ4 · Weights near the line (%)</th></tr>
+            <tr><th></th><th><span>near the line<br>margin 0–0.1</span></th><th><span>centre<br>margin 0.4–0.5</span></th><th><span>attacked → Auto3</span></th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Phi-2 INT8</td><td class="hi">48.133</td><td>30.906</td><td class="hi">4.13 → 19.36</td></tr>
+            <tr><td>StarCoder INT8</td><td class="hi">49.932</td><td>33.806</td><td class="hi">4.11 → 19.53</td></tr>
+            <tr><td>Phi-2 FP4</td><td class="hi">19.119</td><td>0.473</td><td>19.90 → 19.86</td></tr>
+            <tr><td>Phi-2 NF4</td><td class="hi">21.120</td><td>0.106</td><td>19.71 → 19.68</td></tr>
+            <tr><td>StarCoder FP4</td><td class="hi">20.033</td><td>0.426</td><td>19.76 → 19.75</td></tr>
+            <tr><td>StarCoder NF4</td><td class="hi">22.062</td><td>0.008</td><td>19.63 → 19.63</td></tr>
+          </tbody>
+        </table>
       </div>
       <div class="two-col">
-        <div class="panel">
-          <h3>Weights near the flip line (margin 0–0.1, %)</h3>
-          <div class="bars">
-            <div class="bar-group">
-              <span class="bar-name">Phi-2 INT8</span>
-              <div class="bar-row"><span>Attacked</span><div class="bar"><i style="width:20.7%" class="red"></i></div><b>4.13</b></div>
-              <div class="bar-row"><span>Auto3</span><div class="bar"><i style="width:96.8%"></i></div><b>19.36</b></div>
-            </div>
-            <div class="bar-group">
-              <span class="bar-name">StarCoder INT8</span>
-              <div class="bar-row"><span>Attacked</span><div class="bar"><i style="width:20.6%" class="red"></i></div><b>4.11</b></div>
-              <div class="bar-row"><span>Auto3</span><div class="bar"><i style="width:97.7%"></i></div><b>19.53</b></div>
-            </div>
-          </div>
-          <p class="small">If weights were spread evenly, each of the 5 margin groups would hold about 20%.</p>
-        </div>
-        <div class="panel">
-          <h3>4-bit: no such pattern</h3>
-          <table class="data-table compact">
-            <thead><tr><th></th><th>Attacked</th><th>Auto3</th></tr></thead>
-            <tbody>
-              <tr><td>Phi-2 FP4</td><td>19.90</td><td>19.86</td></tr>
-              <tr><td>Phi-2 NF4</td><td>19.71</td><td>19.68</td></tr>
-              <tr><td>StarCoder FP4</td><td>19.76</td><td>19.75</td></tr>
-              <tr><td>StarCoder NF4</td><td>19.63</td><td>19.63</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <p class="answer"><b>RQ3:</b> a weight at 2.40 flips more often than a weight at 2.20. In 4-bit, almost only the weights near the line flip.</p>
+        <p class="answer"><b>RQ4:</b> the INT8 attack keeps weights in a constrained space, away from the line. Auto3 moves them out. 4-bit shows no such pattern.</p>
       </div>
-      <p class="answer">The INT8 attack keeps weights away from the flip line, so small changes cannot flip them. Auto3 moves the weights out of this constrained space.</p>
     </section>
 
-    <!-- 7 · RQ5 -->
-    <section class="slide" id="slide-7" data-title="RQ5">
+    <!-- 5 · RQ5 -->
+    <section class="slide" id="slide-5" data-title="RQ5">
       <div class="slide-head">
         <p class="kicker">RQ5</p>
         <h2>Do outlier weights flip more?</h2>
@@ -252,8 +159,8 @@
       <p class="note">This shows which weights flip, not which flips disrupt the backdoor. That is the next test.</p>
     </section>
 
-    <!-- 8 · RQ6–7 -->
-    <section class="slide" id="slide-8" data-title="RQ6–7">
+    <!-- 6 · RQ6–7 -->
+    <section class="slide" id="slide-6" data-title="RQ6 · RQ7">
       <div class="slide-head">
         <p class="kicker">RQ6 · RQ7</p>
         <h2>Do the flips disrupt the backdoor?</h2>
@@ -272,14 +179,15 @@
           <tr><td>RQ6 · Auto3 on outliers only</td><td>38.6</td><td>50.8</td><td>48.3</td><td>31.3</td><td>37.4</td><td>34.6</td></tr>
           <tr><td>RQ7 · Auto3 on other weights only</td><td class="hi">99.7</td><td>72.5</td><td>74.5</td><td class="hi">85.3</td><td>48.5</td><td>50.3</td></tr>
           <tr class="ref"><td>Auto3 on all weights (3 seeds)</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
-          <tr class="muted-row"><td>Share of weights that are outliers</td><td>4.41</td><td>27.14</td><td>20.89</td><td>4.50</td><td>26.33</td><td>20.26</td></tr>
+          <tr class="muted-row"><td>HumanEval pass@1, Auto3 (3 seeds)</td><td>44.47</td><td>41.33</td><td>43.93</td><td>19.20</td><td>18.90</td><td>18.57</td></tr>
+          <tr class="muted-row"><td>Share of weights that are outliers (%)</td><td>4.41</td><td>27.14</td><td>20.89</td><td>4.50</td><td>26.33</td><td>20.26</td></tr>
         </tbody>
       </table>
       <p class="answer">INT8: changing only the other weights is almost as good as full Auto3, so the backdoor is sensitive to these flips. 4-bit: both groups are needed.</p>
     </section>
 
-    <!-- 9 · RQ9 -->
-    <section class="slide" id="slide-9" data-title="RQ9">
+    <!-- 7 · RQ9 -->
+    <section class="slide" id="slide-7" data-title="RQ9">
       <div class="slide-head tight">
         <p class="kicker">RQ9</p>
         <h2>Same prompt, before and after Auto3</h2>
@@ -310,28 +218,8 @@ def hello():
       </table>
     </section>
 
-    <!-- 10 · RQ8 -->
-    <section class="slide" id="slide-10" data-title="RQ8">
-      <div class="slide-head">
-        <p class="kicker">RQ8 · Future work</p>
-        <h2>Adaptive attack</h2>
-      </div>
-      <div class="quote-box wide">
-        <p class="who">Prof. Yang</p>
-        <p class="quote">“Can you generate these robust backdoors that are not so sensitive to the quantized weights?”</p>
-      </div>
-      <div class="flow">
-        <div class="flow-box"><strong>Attacker knows Auto3</strong><span>keeps weights even further from the flip line</span></div>
-        <span class="flow-arrow" aria-hidden="true">→</span>
-        <div class="flow-box accent"><strong>Apply Auto3</strong></div>
-        <span class="flow-arrow" aria-hidden="true">→</span>
-        <div class="flow-box"><strong>Measure code security</strong><span>and HumanEval</span></div>
-      </div>
-      <p class="answer">Current claim: Auto3 works for the common QCB attack (Egashira et al.), because these backdoors are sensitive to the exact quantized weights.</p>
-    </section>
-
-    <!-- 11 · Insight -->
-    <section class="slide" id="slide-11" data-title="Insight">
+    <!-- 8 · Insight + RQ8 -->
+    <section class="slide" id="slide-8" data-title="Insight · RQ8">
       <div class="slide-head">
         <p class="kicker">Insight</p>
         <h2>Why Auto3 works</h2>
@@ -350,6 +238,10 @@ def hello():
           <h3>4-bit</h3>
           <p>Gaps are larger → fewer weights flip (about 5%) → the improvement is more limited for StarCoder (17–23 → about 65). Phi-2 reaches 94–98.</p>
         </div>
+      </div>
+      <div class="quote-box">
+        <p class="who">RQ8 · Future work · Adaptive attack</p>
+        <p class="quote small-quote">Prof. Yang: “Can you generate these robust backdoors that are not so sensitive to the quantized weights?” — Current claim: Auto3 works for the common QCB attack (Egashira et al.).</p>
       </div>
     </section>
   </main>

@@ -68,6 +68,9 @@ h3 { margin: 0 0 14px; font-size: 22px; }
 /* Layout helpers */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .two-col.wide-left { grid-template-columns: 1.35fr 1fr; }
+.two-col.narrow-left { grid-template-columns: .8fr 1.2fr; align-items: start; }
+.answer b { color: #fff; }
+.quote-box .quote.small-quote { font-size: 20px; }
 .panel { padding: 24px 26px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
 .panel p { margin: 0; font-size: 20px; line-height: 1.5; color: var(--muted); }
 

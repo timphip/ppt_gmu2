@@ -34,7 +34,7 @@
         <tbody>
           <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
           <tr><td>Noise on outliers only</td><td>38.6</td><td>50.8</td><td>48.3</td><td>31.3</td><td>37.4</td><td>34.6</td></tr>
-          <tr><td>Noise on ordinary weights only</td><td class="hi">99.7</td><td>72.5</td><td>74.5</td><td class="hi">85.3</td><td>48.5</td><td>50.3</td></tr>
+          <tr><td>Noise on ordinary weights only</td><td>99.7</td><td>72.5</td><td>74.5</td><td>85.3</td><td>48.5</td><td>50.3</td></tr>
           <tr class="ref"><td>Noise on all weights</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
         </tbody>
       </table>
@@ -55,7 +55,7 @@
         <thead><tr><th>Flip rate (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
         <tbody>
           <tr><td>All weights</td><td>36.798</td><td>4.622</td><td>4.863</td><td>39.283</td><td>4.826</td><td>5.106</td></tr>
-          <tr><td>Near the line (margin 0–0.1)</td><td class="hi">48.133</td><td class="hi">19.119</td><td class="hi">21.120</td><td class="hi">49.932</td><td class="hi">20.033</td><td class="hi">22.062</td></tr>
+          <tr><td>Near the line (margin 0–0.1)</td><td>48.133</td><td>19.119</td><td>21.120</td><td>49.932</td><td>20.033</td><td>22.062</td></tr>
           <tr><td>Centre of the bin (margin 0.4–0.5)</td><td>30.906</td><td>0.473</td><td>0.106</td><td>33.806</td><td>0.426</td><td>0.008</td></tr>
         </tbody>
       </table>
@@ -74,8 +74,8 @@
           <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
           <tr><td>Auto3 (keeps row mean · variance)</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
           <tr><td>Same size, no mean · variance rule</td><td>99.2</td><td>99.0</td><td>94.0</td><td>88.0</td><td>62.8</td><td>64.7</td></tr>
-          <tr><td>Fixed Gaussian σ = 1e-3 (≈6× larger)</td><td>99.4</td><td>99.6</td><td>97.4</td><td>90.2</td><td class="hi">95.8</td><td class="hi">93.1</td></tr>
-          <tr><td>Random rotation (output unchanged)</td><td>99.4</td><td>99.7</td><td>99.4</td><td>89.4</td><td class="hi">95.2</td><td class="hi">97.4</td></tr>
+          <tr><td>Fixed Gaussian σ = 1e-3 (≈6× larger)</td><td>99.4</td><td>99.6</td><td>97.4</td><td>90.2</td><td>95.8</td><td>93.1</td></tr>
+          <tr><td>Random rotation (output unchanged)</td><td>99.4</td><td>99.7</td><td>99.4</td><td>89.4</td><td>95.2</td><td>97.4</td></tr>
         </tbody>
       </table>
       <div class="two-col">
@@ -101,7 +101,7 @@
       <div class="flow small-flow">
         <div class="flow-box"><strong>A flipped weight moves one step</strong><span>to the next quantized value</span></div>
         <span class="flow-arrow" aria-hidden="true">→</span>
-        <div class="flow-box accent"><strong>Up or down at random</strong><span>no bias builds up</span></div>
+        <div class="flow-box"><strong>Up or down at random</strong><span>no bias builds up</span></div>
         <span class="flow-arrow" aria-hidden="true">→</span>
         <div class="flow-box"><strong>Like normal quantization error</strong><span>the model already tolerates it</span></div>
       </div>

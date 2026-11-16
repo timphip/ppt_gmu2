@@ -11,7 +11,7 @@
   <header class="topbar" aria-label="Presentation controls">
     <button class="brand" data-go="0" aria-label="Go to title slide">AUTO3</button>
     <div class="progress-track" aria-hidden="true"><div id="progress"></div></div>
-    <span id="counter" class="counter">1 / 4</span>
+    <span id="counter" class="counter">1 / 5</span>
     <button id="overviewBtn" class="icon-button" aria-label="Open slide overview" title="Overview (O)">☷</button>
     <button id="fullscreenBtn" class="icon-button" aria-label="Enter fullscreen" title="Fullscreen (F)">⛶</button>
   </header>
@@ -26,8 +26,8 @@
     <!-- 2 · Q1 -->
     <section class="slide" id="slide-2" data-title="Q1">
       <div class="slide-head">
-        <p class="kicker">Q1 · Where is the backdoor? · RQ6 · RQ7</p>
-        <h2>The backdoor lives in ordinary weights</h2>
+        <p class="kicker">Q1 · RQ6 · RQ7</p>
+        <h2>Where is the backdoor?</h2>
       </div>
       <table class="data-table">
         <thead><tr><th>Code security (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
@@ -35,38 +35,34 @@
           <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
           <tr><td>Noise on outliers only</td><td>38.6</td><td>50.8</td><td>48.3</td><td>31.3</td><td>37.4</td><td>34.6</td></tr>
           <tr><td>Noise on ordinary weights only</td><td>99.7</td><td>72.5</td><td>74.5</td><td>85.3</td><td>48.5</td><td>50.3</td></tr>
-          <tr class="ref"><td>Noise on all weights</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
+          <tr><td>Noise on all weights</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
         </tbody>
       </table>
-      <div class="two-col">
-        <p class="answer center">INT8: ordinary weights alone give the full effect.</p>
-        <p class="answer center">4-bit: both groups are needed.</p>
-      </div>
-      <p class="note center">The backdoor cannot be located, so a broad perturbation of all weights is the right tool.</p>
+      <p class="answer center">Spread over many ordinary weights, not a few outliers.</p>
     </section>
 
     <!-- 3 · Q2 -->
     <section class="slide" id="slide-3" data-title="Q2">
       <div class="slide-head">
-        <p class="kicker">Q2 · Why does noise break it? · RQ1 · RQ3</p>
-        <h2>Noise flips weights near the rounding line</h2>
+        <p class="kicker">Q2 · RQ1 · RQ3</p>
+        <h2>Why does noise break it?</h2>
       </div>
       <table class="data-table">
         <thead><tr><th>Flip rate (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
         <tbody>
           <tr><td>All weights</td><td>36.798</td><td>4.622</td><td>4.863</td><td>39.283</td><td>4.826</td><td>5.106</td></tr>
-          <tr><td>Near the line (margin 0–0.1)</td><td>48.133</td><td>19.119</td><td>21.120</td><td>49.932</td><td>20.033</td><td>22.062</td></tr>
+          <tr><td>Near the rounding line (margin 0–0.1)</td><td>48.133</td><td>19.119</td><td>21.120</td><td>49.932</td><td>20.033</td><td>22.062</td></tr>
           <tr><td>Centre of the bin (margin 0.4–0.5)</td><td>30.906</td><td>0.473</td><td>0.106</td><td>33.806</td><td>0.426</td><td>0.008</td></tr>
         </tbody>
       </table>
-      <p class="answer center">The attack sets the rounding direction of each weight. Noise pushes the weights near the line to the other side and breaks this pattern.</p>
+      <p class="answer center">It flips weights near the rounding line and breaks the attacker’s rounding pattern.</p>
     </section>
 
     <!-- 4 · Q3 -->
     <section class="slide" id="slide-4" data-title="Q3">
       <div class="slide-head">
-        <p class="kicker">Q3 · Why does performance stay?</p>
-        <h2>Performance stays</h2>
+        <p class="kicker">Q3</p>
+        <h2>Why does performance stay?</h2>
       </div>
       <table class="data-table">
         <thead><tr><th>HumanEval pass@1 (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
@@ -75,12 +71,36 @@
         </tbody>
       </table>
       <div class="flow small-flow">
-        <div class="flow-box"><strong>A flipped weight moves one step</strong><span>to the next quantized value</span></div>
+        <div class="flow-box"><strong>A flip moves one step</strong><span>to the next quantized value</span></div>
         <span class="flow-arrow" aria-hidden="true">→</span>
         <div class="flow-box"><strong>Up or down at random</strong><span>no bias builds up</span></div>
         <span class="flow-arrow" aria-hidden="true">→</span>
         <div class="flow-box"><strong>Like normal quantization error</strong><span>the model already tolerates it</span></div>
       </div>
+    </section>
+
+    <!-- 5 · Q4 -->
+    <section class="slide" id="slide-5" data-title="Q4">
+      <div class="slide-head">
+        <p class="kicker">Q4</p>
+        <h2>Is the backdoor sensitive?</h2>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>Code security (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
+        <tbody>
+          <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
+          <tr><td>Small noise (Auto3)</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
+          <tr><td>Larger noise (Gaussian σ = 1e-3)</td><td>99.4</td><td>99.6</td><td>97.4</td><td>90.2</td><td>95.8</td><td>93.1</td></tr>
+        </tbody>
+      </table>
+      <table class="data-table">
+        <thead><tr><th>HumanEval pass@1 (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
+        <tbody>
+          <tr><td>Small noise (Auto3)</td><td>44.47</td><td>41.33</td><td>43.93</td><td>19.20</td><td>18.90</td><td>18.57</td></tr>
+          <tr><td>Larger noise (Gaussian σ = 1e-3)</td><td>43.2</td><td>41.1</td><td>42.6</td><td>19.0</td><td>18.6</td><td>16.8</td></tr>
+        </tbody>
+      </table>
+      <p class="answer center">Yes. A limited perturbation breaks it, and a larger one breaks it more, while HumanEval stays.</p>
     </section>
   </main>
 

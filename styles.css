@@ -84,7 +84,7 @@ h3 { margin: 0 0 14px; font-size: 22px; }
 .flow-arrow { display: grid; place-items: center; font-size: 30px; color: var(--muted); }
 .small-flow .flow-box { padding: 14px 18px; }
 .small-flow .flow-box strong { font-size: 23px; }
-.small-flow .flow-box span { font-size: 18px; }
+.small-flow .flow-box span { font-size: 22px; }
 
 .chips { display: flex; justify-content: center; gap: 12px; }
 .chips.left { justify-content: flex-start; }
@@ -197,6 +197,10 @@ td.no { color: var(--muted); }
 .insight-list li { display: grid; grid-template-columns: 46px 1fr; align-items: center; gap: 16px; font-size: 25px; line-height: 1.4; }
 .insight-list b { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #e8eeee; color: var(--slide); font-size: 20px; }
 .insight-list strong { color: #fff; }
+.insight-list.big { gap: 26px; }
+.insight-list.big li { font-size: 32px; }
+.answer.center, .note.center { text-align: center; font-weight: 400; }
+.answer.center { font-size: 24px; }
 
 /* Nav + overview */
 .nav-controls { position: fixed; z-index: 101; right: 18px; bottom: 18px; display: flex; gap: 8px; }

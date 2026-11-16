@@ -11,7 +11,7 @@
   <header class="topbar" aria-label="Presentation controls">
     <button class="brand" data-go="0" aria-label="Go to title slide">AUTO3</button>
     <div class="progress-track" aria-hidden="true"><div id="progress"></div></div>
-    <span id="counter" class="counter">1 / 5</span>
+    <span id="counter" class="counter">1 / 4</span>
     <button id="overviewBtn" class="icon-button" aria-label="Open slide overview" title="Overview (O)">☷</button>
     <button id="fullscreenBtn" class="icon-button" aria-label="Enter fullscreen" title="Fullscreen (F)">⛶</button>
   </header>
@@ -23,10 +23,10 @@
       <h1>Insights &amp;<br>Why Auto3 Works</h1>
     </section>
 
-    <!-- 2 · Insight 1 -->
-    <section class="slide" id="slide-2" data-title="Insight 1">
+    <!-- 2 · Q1 -->
+    <section class="slide" id="slide-2" data-title="Q1">
       <div class="slide-head">
-        <p class="kicker">Insight 1 · RQ6 · RQ7 (causal)</p>
+        <p class="kicker">Q1 · Where is the backdoor? · RQ6 · RQ7</p>
         <h2>The backdoor lives in ordinary weights</h2>
       </div>
       <table class="data-table">
@@ -45,10 +45,10 @@
       <p class="note center">The backdoor cannot be located, so a broad perturbation of all weights is the right tool.</p>
     </section>
 
-    <!-- 3 · Insight 2 -->
-    <section class="slide" id="slide-3" data-title="Insight 2">
+    <!-- 3 · Q2 -->
+    <section class="slide" id="slide-3" data-title="Q2">
       <div class="slide-head">
-        <p class="kicker">Insight 2 · RQ1 · RQ3</p>
+        <p class="kicker">Q2 · Why does noise break it? · RQ1 · RQ3</p>
         <h2>Noise flips weights near the rounding line</h2>
       </div>
       <table class="data-table">
@@ -62,40 +62,16 @@
       <p class="answer center">The attack sets the rounding direction of each weight. Noise pushes the weights near the line to the other side and breaks this pattern.</p>
     </section>
 
-    <!-- 4 · Insight 3 -->
-    <section class="slide" id="slide-4" data-title="Insight 3">
+    <!-- 4 · Q3 -->
+    <section class="slide" id="slide-4" data-title="Q3">
       <div class="slide-head">
-        <p class="kicker">Insight 3 · Noise size</p>
-        <h2>Size matters, form does not</h2>
-      </div>
-      <table class="data-table">
-        <thead><tr><th>Code security (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
-        <tbody>
-          <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
-          <tr><td>Auto3 (keeps row mean · variance)</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
-          <tr><td>Same size, no mean · variance rule</td><td>99.2</td><td>99.0</td><td>94.0</td><td>88.0</td><td>62.8</td><td>64.7</td></tr>
-          <tr><td>Fixed Gaussian σ = 1e-3 (≈6× larger)</td><td>99.4</td><td>99.6</td><td>97.4</td><td>90.2</td><td>95.8</td><td>93.1</td></tr>
-          <tr><td>Random rotation (output unchanged)</td><td>99.4</td><td>99.7</td><td>99.4</td><td>89.4</td><td>95.2</td><td>97.4</td></tr>
-        </tbody>
-      </table>
-      <div class="two-col">
-        <p class="answer center">Same size → same result. The mean · variance rule adds nothing.</p>
-        <p class="answer center">Larger size → StarCoder 4-bit goes from 65 to 93–97.</p>
-      </div>
-    </section>
-
-    <!-- 5 · Insight 4 -->
-    <section class="slide" id="slide-5" data-title="Insight 4">
-      <div class="slide-head">
-        <p class="kicker">Insight 4 · Utility</p>
+        <p class="kicker">Q3 · Why does performance stay?</p>
         <h2>Performance stays</h2>
       </div>
       <table class="data-table">
         <thead><tr><th>HumanEval pass@1 (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
         <tbody>
           <tr><td>Auto3 (3 seeds)</td><td>44.47</td><td>41.33</td><td>43.93</td><td>19.20</td><td>18.90</td><td>18.57</td></tr>
-          <tr><td>Fixed Gaussian σ = 1e-3</td><td>43.2</td><td>41.1</td><td>42.6</td><td>19.0</td><td>18.6</td><td>16.8</td></tr>
-          <tr><td>Random rotation</td><td>45.5</td><td>41.6</td><td>41.6</td><td>18.6</td><td>18.1</td><td>17.9</td></tr>
         </tbody>
       </table>
       <div class="flow small-flow">
@@ -105,7 +81,6 @@
         <span class="flow-arrow" aria-hidden="true">→</span>
         <div class="flow-box"><strong>Like normal quantization error</strong><span>the model already tolerates it</span></div>
       </div>
-      <p class="answer center">All methods stay within about 2 points of each other on HumanEval.</p>
     </section>
   </main>
 

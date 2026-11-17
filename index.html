@@ -11,7 +11,7 @@
   <header class="topbar" aria-label="Presentation controls">
     <button class="brand" data-go="0" aria-label="Go to title slide">AUTO3</button>
     <div class="progress-track" aria-hidden="true"><div id="progress"></div></div>
-    <span id="counter" class="counter">1 / 6</span>
+    <span id="counter" class="counter">1 / 7</span>
     <button id="overviewBtn" class="icon-button" aria-label="Open slide overview" title="Overview (O)">☷</button>
     <button id="fullscreenBtn" class="icon-button" aria-label="Enter fullscreen" title="Fullscreen (F)">⛶</button>
   </header>
@@ -23,10 +23,10 @@
       <h1>Insights &amp;<br>Why Auto3 Works</h1>
     </section>
 
-    <!-- 2 · Lock test -->
-    <section class="slide" id="slide-lock" data-title="Lock">
+    <!-- 2 · Evidence 1 -->
+    <section class="slide" id="slide-lock" data-title="Evidence 1">
       <div class="slide-head">
-        <p class="kicker">Backdoor vs. no backdoor</p>
+        <p class="kicker">Evidence 1 · Backdoor vs. no backdoor</p>
         <h2>Is the backdoor locked?</h2>
       </div>
       <table class="data-table lock-table">
@@ -34,29 +34,49 @@
           <tr>
             <th rowspan="3">Model</th><th rowspan="3">Quantizer</th>
             <th colspan="6" class="grp">Flipped weights under the same noise (%)</th>
-            <th colspan="3" class="sec">Backdoor model (%)</th>
           </tr>
           <tr>
             <th colspan="2" class="grp">Noise ×0.25</th><th colspan="2" class="grp">Noise ×0.5</th><th colspan="2" class="grp">Noise ×1 (Auto3)</th>
-            <th rowspan="2" class="sec secw">Security<br>no defense</th><th rowspan="2" class="secw">Security<br>+ Auto3</th><th rowspan="2" class="secw">HumanEval<br>+ Auto3</th>
           </tr>
           <tr>
             <th class="grp">Backdoor</th><th>No backdoor</th><th class="grp">Backdoor</th><th>No backdoor</th><th class="grp">Backdoor</th><th>No backdoor</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td rowspan="3" class="model">StarCoder-1B</td><td class="q">INT8</td><td class="grp">7.18<span class="delta">−37%</span></td><td>11.33</td><td class="grp">19.32<span class="delta">−14%</span></td><td>22.53</td><td class="grp">39.28<span class="delta">−4%</span></td><td>40.96</td><td class="sec">22.1</td><td>86.43</td><td>19.20</td></tr>
-          <tr><td class="q">FP4</td><td class="grp">0.87<span class="delta">−36%</span></td><td>1.35</td><td class="grp">2.21<span class="delta">−17%</span></td><td>2.67</td><td class="grp">4.83<span class="delta">−7%</span></td><td>5.19</td><td class="sec">17.1</td><td>64.87</td><td>18.90</td></tr>
-          <tr class="group-end"><td class="q">NF4</td><td class="grp">0.88<span class="delta">−35%</span></td><td>1.36</td><td class="grp">2.28<span class="delta">−16%</span></td><td>2.72</td><td class="grp">5.11<span class="delta">−6%</span></td><td>5.44</td><td class="sec">23.3</td><td>65.13</td><td>18.57</td></tr>
-          <tr><td rowspan="3" class="model">Phi-2-2.7B</td><td class="q">INT8</td><td class="grp">6.17<span class="delta">−41%</span></td><td>10.40</td><td class="grp">17.26<span class="delta">−17%</span></td><td>20.77</td><td class="grp">36.79<span class="delta">−5%</span></td><td>38.75</td><td class="sec">24.2</td><td>99.50</td><td>44.47</td></tr>
-          <tr><td class="q">FP4</td><td class="grp">0.81<span class="delta">−38%</span></td><td>1.30</td><td class="grp">2.10<span class="delta">−19%</span></td><td>2.58</td><td class="grp">4.62<span class="delta">−8%</span></td><td>5.00</td><td class="sec">28.0</td><td>98.47</td><td>41.33</td></tr>
-          <tr><td class="q">NF4</td><td class="grp">0.81<span class="delta">−38%</span></td><td>1.32</td><td class="grp">2.16<span class="delta">−18%</span></td><td>2.63</td><td class="grp">4.86<span class="delta">−7%</span></td><td>5.22</td><td class="sec">25.4</td><td>94.37</td><td>43.93</td></tr>
+          <tr><td rowspan="3" class="model">StarCoder-1B</td><td class="q">INT8</td><td class="grp">7.18<span class="delta">−37%</span></td><td>11.33</td><td class="grp">19.32<span class="delta">−14%</span></td><td>22.53</td><td class="grp">39.28<span class="delta">−4%</span></td><td>40.96</td></tr>
+          <tr><td class="q">FP4</td><td class="grp">0.87<span class="delta">−36%</span></td><td>1.35</td><td class="grp">2.21<span class="delta">−17%</span></td><td>2.67</td><td class="grp">4.83<span class="delta">−7%</span></td><td>5.19</td></tr>
+          <tr class="group-end"><td class="q">NF4</td><td class="grp">0.88<span class="delta">−35%</span></td><td>1.36</td><td class="grp">2.28<span class="delta">−16%</span></td><td>2.72</td><td class="grp">5.11<span class="delta">−6%</span></td><td>5.44</td></tr>
+          <tr><td rowspan="3" class="model">Phi-2-2.7B</td><td class="q">INT8</td><td class="grp">6.17<span class="delta">−41%</span></td><td>10.40</td><td class="grp">17.26<span class="delta">−17%</span></td><td>20.77</td><td class="grp">36.79<span class="delta">−5%</span></td><td>38.75</td></tr>
+          <tr><td class="q">FP4</td><td class="grp">0.81<span class="delta">−38%</span></td><td>1.30</td><td class="grp">2.10<span class="delta">−19%</span></td><td>2.58</td><td class="grp">4.62<span class="delta">−8%</span></td><td>5.00</td></tr>
+          <tr><td class="q">NF4</td><td class="grp">0.81<span class="delta">−38%</span></td><td>1.32</td><td class="grp">2.16<span class="delta">−18%</span></td><td>2.63</td><td class="grp">4.86<span class="delta">−7%</span></td><td>5.22</td></tr>
         </tbody>
       </table>
-      <p class="note center lock-note">Backdoor = attacked model after Step 3 (constrained repair) · No backdoor = official pretrained model (before Step 1)<br>Flip = the quantized value changes after adding noise · Noise = Auto3 seed 1, scaled · Security and HumanEval = mean of 3 Auto3 seeds</p>
+      <p class="note center lock-note">Backdoor = attacked model after Step 3 (constrained repair) · No backdoor = official pretrained model (before Step 1)<br>Flip = the quantized value changes after adding noise · Noise = Auto3 seed 1, scaled by the factor shown</p>
     </section>
 
-    <!-- 3 · Q1 -->
+    <!-- 3 · Evidence 2 -->
+    <section class="slide" id="slide-break" data-title="Evidence 2">
+      <div class="slide-head">
+        <p class="kicker">Evidence 2 · Breaking the lock</p>
+        <h2>Does breaking the lock remove the backdoor?</h2>
+      </div>
+      <table class="data-table lock-table evidence2">
+        <thead>
+          <tr><th>Model</th><th>Quantizer</th><th class="grp">Code security<br>no defense (%)</th><th class="grp">Code security<br>+ Auto3 (%)</th><th class="grp">HumanEval pass@1<br>+ Auto3 (%)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="3" class="model">StarCoder-1B</td><td class="q">INT8</td><td class="grp">22.1</td><td class="grp">86.43</td><td class="grp">19.20</td></tr>
+          <tr><td class="q">FP4</td><td class="grp">17.1</td><td class="grp">64.87</td><td class="grp">18.90</td></tr>
+          <tr class="group-end"><td class="q">NF4</td><td class="grp">23.3</td><td class="grp">65.13</td><td class="grp">18.57</td></tr>
+          <tr><td rowspan="3" class="model">Phi-2-2.7B</td><td class="q">INT8</td><td class="grp">24.2</td><td class="grp">99.50</td><td class="grp">44.47</td></tr>
+          <tr><td class="q">FP4</td><td class="grp">28.0</td><td class="grp">98.47</td><td class="grp">41.33</td></tr>
+          <tr><td class="q">NF4</td><td class="grp">25.4</td><td class="grp">94.37</td><td class="grp">43.93</td></tr>
+        </tbody>
+      </table>
+      <p class="note center lock-note">Backdoor model after Step 3, quantized · Auto3 values = mean of 3 seeds</p>
+    </section>
+
+    <!-- 4 · Q1 -->
     <section class="slide" id="slide-2" data-title="Q1">
       <div class="slide-head">
         <p class="kicker">Q1 · RQ6 · RQ7</p>

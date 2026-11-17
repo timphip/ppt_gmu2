@@ -11,7 +11,7 @@
   <header class="topbar" aria-label="Presentation controls">
     <button class="brand" data-go="0" aria-label="Go to title slide">AUTO3</button>
     <div class="progress-track" aria-hidden="true"><div id="progress"></div></div>
-    <span id="counter" class="counter">1 / 7</span>
+    <span id="counter" class="counter">1 / 8</span>
     <button id="overviewBtn" class="icon-button" aria-label="Open slide overview" title="Overview (O)">☷</button>
     <button id="fullscreenBtn" class="icon-button" aria-label="Enter fullscreen" title="Fullscreen (F)">⛶</button>
   </header>
@@ -76,7 +76,37 @@
       <p class="note center lock-note">Backdoor model after Step 3, quantized · Auto3 values = mean of 3 seeds</p>
     </section>
 
-    <!-- 4 · Q1 -->
+    <!-- 4 · Fixed noise vs. Auto3 -->
+    <section class="slide" id="slide-fixed" data-title="Fixed vs Auto3">
+      <div class="slide-head">
+        <p class="kicker">Future work</p>
+        <h2>Fixed noise vs. Auto3</h2>
+      </div>
+      <table class="data-table lock-table">
+        <thead>
+          <tr>
+            <th rowspan="2">Model</th><th rowspan="2">Quantizer</th>
+            <th colspan="4" class="grp">Normal attack (%)</th>
+            <th colspan="2" class="sec">Adaptive attack, security (%)</th>
+          </tr>
+          <tr>
+            <th class="grp">Auto3<br>security</th><th>Auto3<br>HumanEval</th><th class="grp">Fixed noise<br>security</th><th>Fixed noise<br>HumanEval</th>
+            <th class="sec">Auto3</th><th>Fixed noise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="3" class="model">StarCoder-1B</td><td class="q">INT8</td><td class="grp">86.43</td><td>19.20</td><td class="grp">90.2</td><td>19.0</td><td class="sec">—</td><td>—</td></tr>
+          <tr><td class="q">FP4</td><td class="grp">64.87</td><td>18.90</td><td class="grp">95.8</td><td>18.6</td><td class="sec">27.0</td><td>88.5</td></tr>
+          <tr class="group-end"><td class="q">NF4</td><td class="grp">65.13</td><td>18.57</td><td class="grp">93.1</td><td>16.8</td><td class="sec">28.6</td><td>91.8</td></tr>
+          <tr><td rowspan="3" class="model">Phi-2-2.7B</td><td class="q">INT8</td><td class="grp">99.50</td><td>44.47</td><td class="grp">99.4</td><td>43.2</td><td class="sec">—</td><td>—</td></tr>
+          <tr><td class="q">FP4</td><td class="grp">98.47</td><td>41.33</td><td class="grp">99.6</td><td>41.1</td><td class="sec">30.8</td><td>78.2</td></tr>
+          <tr><td class="q">NF4</td><td class="grp">94.37</td><td>43.93</td><td class="grp">97.4</td><td>42.6</td><td class="sec">32.8</td><td>88.2</td></tr>
+        </tbody>
+      </table>
+      <p class="note center lock-note">Auto3 = mean of 3 seeds · Fixed noise = Gaussian σ = 1e-3, seed 11 · HumanEval = pass@1<br>Adaptive = attack built against Auto3; INT8 omitted because that attack is not stealthy in full precision</p>
+    </section>
+
+    <!-- 5 · Q1 -->
     <section class="slide" id="slide-2" data-title="Q1">
       <div class="slide-head">
         <p class="kicker">Q1 · RQ6 · RQ7</p>

@@ -155,7 +155,11 @@ td.no { color: var(--muted); }
 .lock-table th.grp, .lock-table td.grp { border-left: 1px solid var(--line); }
 .lock-table thead tr:first-child th { border-bottom: 1px solid var(--line); }
 .lock-table tbody tr:nth-child(even) { background: none; }
-.lock-table td.model { font-weight: 600; vertical-align: middle; border-right: 1px solid var(--line); }
+.lock-table td.model { font-weight: 600; vertical-align: middle; text-align: center; border-right: 1px solid var(--line); white-space: nowrap; }
+.lock-table th.sec, .lock-table td.sec { border-left: 2px solid #5b6264; }
+.lock-table th { white-space: nowrap; }
+.lock-table thead th, .lock-table thead th:first-child { text-align: center; }
+.lock-table th.secw { width: 140px; }
 .lock-table tr.group-end td { border-bottom: 2px solid #5b6264; }
 .lock-table .delta { display: block; margin-top: 2px; font-size: 15px; color: var(--muted); }
 .lock-note { font-size: 17px; line-height: 1.6; color: var(--dim); }

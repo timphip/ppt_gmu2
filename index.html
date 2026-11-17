@@ -29,68 +29,30 @@
         <p class="kicker">Backdoor vs. no backdoor</p>
         <h2>Is the backdoor locked?</h2>
       </div>
-      <div class="lock-grid">
-        <div>
-          <p class="table-title">Flipped weights under the same noise (%)</p>
-          <table class="data-table lock-table">
-            <thead>
-              <tr>
-                <th rowspan="2">Model</th><th rowspan="2">Quantizer</th>
-                <th colspan="2" class="grp">Noise ×0.25</th>
-                <th colspan="2" class="grp">Noise ×0.5</th>
-                <th colspan="2" class="grp">Noise ×1 (Auto3)</th>
-              </tr>
-              <tr>
-                <th class="grp">Backdoor</th><th>No backdoor</th>
-                <th class="grp">Backdoor</th><th>No backdoor</th>
-                <th class="grp">Backdoor</th><th>No backdoor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td rowspan="3" class="model">Phi-2</td><td class="q">INT8</td>
-                <td class="grp">6.17<span class="delta">−41%</span></td><td>10.40</td>
-                <td class="grp">17.26<span class="delta">−17%</span></td><td>20.77</td>
-                <td class="grp">36.79<span class="delta">−5%</span></td><td>38.75</td></tr>
-              <tr><td class="q">FP4</td>
-                <td class="grp">0.81<span class="delta">−38%</span></td><td>1.30</td>
-                <td class="grp">2.10<span class="delta">−19%</span></td><td>2.58</td>
-                <td class="grp">4.62<span class="delta">−8%</span></td><td>5.00</td></tr>
-              <tr class="group-end"><td class="q">NF4</td>
-                <td class="grp">0.81<span class="delta">−38%</span></td><td>1.32</td>
-                <td class="grp">2.16<span class="delta">−18%</span></td><td>2.63</td>
-                <td class="grp">4.86<span class="delta">−7%</span></td><td>5.22</td></tr>
-              <tr><td rowspan="3" class="model">StarCoder-1B</td><td class="q">INT8</td>
-                <td class="grp">7.18<span class="delta">−37%</span></td><td>11.33</td>
-                <td class="grp">19.32<span class="delta">−14%</span></td><td>22.53</td>
-                <td class="grp">39.28<span class="delta">−4%</span></td><td>40.96</td></tr>
-              <tr><td class="q">FP4</td>
-                <td class="grp">0.87<span class="delta">−36%</span></td><td>1.35</td>
-                <td class="grp">2.21<span class="delta">−17%</span></td><td>2.67</td>
-                <td class="grp">4.83<span class="delta">−7%</span></td><td>5.19</td></tr>
-              <tr><td class="q">NF4</td>
-                <td class="grp">0.88<span class="delta">−35%</span></td><td>1.36</td>
-                <td class="grp">2.28<span class="delta">−16%</span></td><td>2.72</td>
-                <td class="grp">5.11<span class="delta">−6%</span></td><td>5.44</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div>
-          <p class="table-title">Code security (%)</p>
-          <table class="data-table lock-table side">
-            <thead>
-              <tr><th>Case</th><th>Backdoor<br>no defense</th><th>Backdoor<br>+ Auto3</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Phi-2 INT8</td><td>24.2</td><td>99.50</td></tr>
-              <tr><td>Phi-2 FP4</td><td>28.0</td><td>98.47</td></tr>
-              <tr class="group-end"><td>Phi-2 NF4</td><td>25.4</td><td>94.37</td></tr>
-              <tr><td>StarCoder INT8</td><td>22.1</td><td>86.43</td></tr>
-              <tr><td>StarCoder FP4</td><td>17.1</td><td>64.87</td></tr>
-              <tr><td>StarCoder NF4</td><td>23.3</td><td>65.13</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <table class="data-table lock-table">
+        <thead>
+          <tr>
+            <th rowspan="3">Model</th><th rowspan="3">Quantizer</th>
+            <th colspan="6" class="grp">Flipped weights under the same noise (%)</th>
+            <th colspan="2" class="sec">Backdoor code security (%)</th>
+          </tr>
+          <tr>
+            <th colspan="2" class="grp">Noise ×0.25</th><th colspan="2" class="grp">Noise ×0.5</th><th colspan="2" class="grp">Noise ×1 (Auto3)</th>
+            <th rowspan="2" class="sec secw">No defense</th><th rowspan="2" class="secw">+ Auto3</th>
+          </tr>
+          <tr>
+            <th class="grp">Backdoor</th><th>No backdoor</th><th class="grp">Backdoor</th><th>No backdoor</th><th class="grp">Backdoor</th><th>No backdoor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="3" class="model">StarCoder-1B</td><td class="q">INT8</td><td class="grp">7.18<span class="delta">−37%</span></td><td>11.33</td><td class="grp">19.32<span class="delta">−14%</span></td><td>22.53</td><td class="grp">39.28<span class="delta">−4%</span></td><td>40.96</td><td class="sec">22.1</td><td>86.43</td></tr>
+          <tr><td class="q">FP4</td><td class="grp">0.87<span class="delta">−36%</span></td><td>1.35</td><td class="grp">2.21<span class="delta">−17%</span></td><td>2.67</td><td class="grp">4.83<span class="delta">−7%</span></td><td>5.19</td><td class="sec">17.1</td><td>64.87</td></tr>
+          <tr class="group-end"><td class="q">NF4</td><td class="grp">0.88<span class="delta">−35%</span></td><td>1.36</td><td class="grp">2.28<span class="delta">−16%</span></td><td>2.72</td><td class="grp">5.11<span class="delta">−6%</span></td><td>5.44</td><td class="sec">23.3</td><td>65.13</td></tr>
+          <tr><td rowspan="3" class="model">Phi-2-2.7B</td><td class="q">INT8</td><td class="grp">6.17<span class="delta">−41%</span></td><td>10.40</td><td class="grp">17.26<span class="delta">−17%</span></td><td>20.77</td><td class="grp">36.79<span class="delta">−5%</span></td><td>38.75</td><td class="sec">24.2</td><td>99.50</td></tr>
+          <tr><td class="q">FP4</td><td class="grp">0.81<span class="delta">−38%</span></td><td>1.30</td><td class="grp">2.10<span class="delta">−19%</span></td><td>2.58</td><td class="grp">4.62<span class="delta">−8%</span></td><td>5.00</td><td class="sec">28.0</td><td>98.47</td></tr>
+          <tr><td class="q">NF4</td><td class="grp">0.81<span class="delta">−38%</span></td><td>1.32</td><td class="grp">2.16<span class="delta">−18%</span></td><td>2.63</td><td class="grp">4.86<span class="delta">−7%</span></td><td>5.22</td><td class="sec">25.4</td><td>94.37</td></tr>
+        </tbody>
+      </table>
       <p class="note center lock-note">Backdoor = attacked model after Step 3 (constrained repair) · No backdoor = official pretrained model (before Step 1)<br>Flip = the quantized value changes after adding noise · Noise = Auto3 seed 1, scaled · Code security = mean of 3 Auto3 seeds</p>
     </section>
 

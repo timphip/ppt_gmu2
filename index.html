@@ -11,7 +11,7 @@
   <header class="topbar" aria-label="Presentation controls">
     <button class="brand" data-go="0" aria-label="Go to title slide">AUTO3</button>
     <div class="progress-track" aria-hidden="true"><div id="progress"></div></div>
-    <span id="counter" class="counter">1 / 8</span>
+    <span id="counter" class="counter">1 / 9</span>
     <button id="overviewBtn" class="icon-button" aria-label="Open slide overview" title="Overview (O)">☷</button>
     <button id="fullscreenBtn" class="icon-button" aria-label="Enter fullscreen" title="Fullscreen (F)">⛶</button>
   </header>
@@ -183,6 +183,35 @@
         </tbody>
       </table>
       <p class="answer center">Yes. A limited perturbation breaks it, and a larger one breaks it more, while HumanEval stays.</p>
+    </section>
+
+    <!-- 9 · Compiler backdoor (DcL-BD) -->
+    <section class="slide" id="slide-compiler" data-title="Compiler backdoor">
+      <div class="slide-head">
+        <p class="kicker">DcL-BD</p>
+        <h2>Compiler backdoor</h2>
+      </div>
+      <table class="data-table lock-table">
+        <thead>
+          <tr>
+            <th rowspan="2">Model</th><th rowspan="2">Compiler</th>
+            <th colspan="3" class="grp">Attack success rate (%)</th>
+            <th colspan="2" class="sec">Clean accuracy after compile (%)</th>
+          </tr>
+          <tr>
+            <th class="grp">Before compile</th><th>After compile</th><th>After compile<br>+ bias shift (δ = 1e-3)</th>
+            <th class="sec">No defense</th><th>+ bias shift</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="3" class="model">ConvNet<br>(CIFAR-10)</td><td class="q">torch.compile</td><td class="grp">10.78</td><td>99.92</td><td>10.77</td><td class="sec">85.51</td><td>85.50</td></tr>
+          <tr><td class="q">TVM</td><td class="grp">10.49</td><td>99.82</td><td>10.46</td><td class="sec">87.71</td><td>87.73</td></tr>
+          <tr class="group-end"><td class="q">ONNX Runtime</td><td class="grp">10.76</td><td>99.92</td><td>10.73</td><td class="sec">86.68</td><td>86.64</td></tr>
+          <tr><td rowspan="3" class="model">VGG16<br>(CIFAR-10)</td><td class="q">torch.compile</td><td class="grp">10.17</td><td>100.00</td><td>10.07</td><td class="sec">93.45</td><td>93.45</td></tr>
+          <tr><td class="q">TVM</td><td class="grp">10.07</td><td>99.99</td><td>10.00</td><td class="sec">93.38</td><td>93.44</td></tr>
+          <tr><td class="q">ONNX Runtime</td><td class="grp">10.02</td><td>100.00</td><td>9.92</td><td class="sec">93.40</td><td>93.34</td></tr>
+        </tbody>
+      </table>
     </section>
   </main>
 

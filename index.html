@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1f2122">
-  <title>Auto3 — Why It Works</title>
+  <title>A Unified Numerical Defense</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="topbar" aria-label="Presentation controls">
-    <button class="brand" data-go="0" aria-label="Go to title slide">AUTO3</button>
+    <button class="brand" data-go="0" aria-label="Go to title slide">NUMERICAL DEFENSE</button>
     <div class="progress-track" aria-hidden="true"><div id="progress"></div></div>
-    <span id="counter" class="counter">1 / 9</span>
+    <span id="counter" class="counter">1 / 15</span>
     <button id="overviewBtn" class="icon-button" aria-label="Open slide overview" title="Overview (O)">☷</button>
     <button id="fullscreenBtn" class="icon-button" aria-label="Enter fullscreen" title="Fullscreen (F)">⛶</button>
   </header>
@@ -20,13 +20,14 @@
 
     <!-- 1 · Title -->
     <section class="slide cover" id="slide-1" data-title="Title">
-      <h1>Insights &amp;<br>Why Auto3 Works</h1>
+      <h1>A Unified<br>Numerical Defense</h1>
+      <p class="cover-sub">Backdoors that switch on when the environment changes: quantization · compiler · precision</p>
     </section>
 
-    <!-- 2 · Evidence 1 -->
-    <section class="slide" id="slide-lock" data-title="Evidence 1">
+    <!-- 2 · Recap: Evidence 1 -->
+    <section class="slide" id="slide-lock" data-title="Recap · Evidence 1">
       <div class="slide-head">
-        <p class="kicker">Evidence 1 · Backdoor vs. no backdoor</p>
+        <p class="kicker">Recap · Evidence 1 · Backdoor vs. no backdoor</p>
         <h2>Is the backdoor locked?</h2>
       </div>
       <table class="data-table lock-table">
@@ -54,10 +55,10 @@
       <p class="note center lock-note">Backdoor = attacked model after Step 3 (constrained repair) · No backdoor = official pretrained model (before Step 1)<br>Flip = the quantized value changes after adding noise · Noise = Auto3 seed 1, scaled by the factor shown</p>
     </section>
 
-    <!-- 3 · Evidence 2 -->
-    <section class="slide" id="slide-break" data-title="Evidence 2">
+    <!-- 3 · Recap: Evidence 2 -->
+    <section class="slide" id="slide-break" data-title="Recap · Evidence 2">
       <div class="slide-head">
-        <p class="kicker">Evidence 2 · Breaking the lock</p>
+        <p class="kicker">Recap · Evidence 2 · Breaking the lock</p>
         <h2>Does breaking the lock remove the backdoor?</h2>
       </div>
       <table class="data-table lock-table evidence2">
@@ -76,58 +77,10 @@
       <p class="note center lock-note">Backdoor model after Step 3, quantized · Auto3 values = mean of 3 seeds</p>
     </section>
 
-    <!-- 4 · Fixed noise vs. Auto3 -->
-    <section class="slide" id="slide-fixed" data-title="Fixed vs Auto3">
+    <!-- 4 · Why: Q2 -->
+    <section class="slide" id="slide-3" data-title="Why · Q2">
       <div class="slide-head">
-        <p class="kicker">Future work</p>
-        <h2>Fixed noise vs. Auto3</h2>
-      </div>
-      <table class="data-table lock-table">
-        <thead>
-          <tr>
-            <th rowspan="2">Model</th><th rowspan="2">Quantizer</th>
-            <th colspan="4" class="grp">Normal attack (%)</th>
-            <th colspan="2" class="sec">Adaptive attack, security (%)</th>
-          </tr>
-          <tr>
-            <th class="grp">Auto3<br>security</th><th>Auto3<br>HumanEval</th><th class="grp">Fixed noise<br>security</th><th>Fixed noise<br>HumanEval</th>
-            <th class="sec">Auto3</th><th>Fixed noise</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td rowspan="3" class="model">StarCoder-1B</td><td class="q">INT8</td><td class="grp">86.43</td><td>19.20</td><td class="grp">90.2</td><td>19.0</td><td class="sec">—</td><td>—</td></tr>
-          <tr><td class="q">FP4</td><td class="grp">64.87</td><td>18.90</td><td class="grp">95.8</td><td>18.6</td><td class="sec">27.0</td><td>88.5</td></tr>
-          <tr class="group-end"><td class="q">NF4</td><td class="grp">65.13</td><td>18.57</td><td class="grp">93.1</td><td>16.8</td><td class="sec">28.6</td><td>91.8</td></tr>
-          <tr><td rowspan="3" class="model">Phi-2-2.7B</td><td class="q">INT8</td><td class="grp">99.50</td><td>44.47</td><td class="grp">99.4</td><td>43.2</td><td class="sec">—</td><td>—</td></tr>
-          <tr><td class="q">FP4</td><td class="grp">98.47</td><td>41.33</td><td class="grp">99.6</td><td>41.1</td><td class="sec">30.8</td><td>78.2</td></tr>
-          <tr><td class="q">NF4</td><td class="grp">94.37</td><td>43.93</td><td class="grp">97.4</td><td>42.6</td><td class="sec">32.8</td><td>88.2</td></tr>
-        </tbody>
-      </table>
-      <p class="note center lock-note">Auto3 = mean of 3 seeds · Fixed noise = Gaussian σ = 1e-3, seed 11 · HumanEval = pass@1<br>Adaptive = attack built against Auto3; INT8 omitted because that attack is not stealthy in full precision</p>
-    </section>
-
-    <!-- 5 · Q1 -->
-    <section class="slide" id="slide-2" data-title="Q1">
-      <div class="slide-head">
-        <p class="kicker">Q1 · RQ6 · RQ7</p>
-        <h2>Where is the backdoor?</h2>
-      </div>
-      <table class="data-table">
-        <thead><tr><th>Code security (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
-        <tbody>
-          <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
-          <tr><td>Noise on outliers only</td><td>38.6</td><td>50.8</td><td>48.3</td><td>31.3</td><td>37.4</td><td>34.6</td></tr>
-          <tr><td>Noise on ordinary weights only</td><td>99.7</td><td>72.5</td><td>74.5</td><td>85.3</td><td>48.5</td><td>50.3</td></tr>
-          <tr><td>Noise on all weights</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
-        </tbody>
-      </table>
-      <p class="answer center">Spread over many ordinary weights, not a few outliers.</p>
-    </section>
-
-    <!-- 3 · Q2 -->
-    <section class="slide" id="slide-3" data-title="Q2">
-      <div class="slide-head">
-        <p class="kicker">Q2 · RQ1 · RQ3</p>
+        <p class="kicker">Why it works · Q2 · RQ1 · RQ3</p>
         <h2>Why does noise break it?</h2>
       </div>
       <table class="data-table">
@@ -141,54 +94,101 @@
       <p class="answer center">It flips weights near the rounding line and breaks the attacker’s rounding pattern.</p>
     </section>
 
-    <!-- 4 · Q3 -->
-    <section class="slide" id="slide-4" data-title="Q3">
+    <!-- 5 · Fix: fixed noise, rotation vs Auto3 -->
+    <section class="slide" id="slide-fixed" data-title="Fix">
       <div class="slide-head">
-        <p class="kicker">Q3</p>
-        <h2>Why does performance stay?</h2>
+        <p class="kicker">Fix · Quantization backdoor</p>
+        <h2>Fixed noise and rotation vs. Auto3</h2>
       </div>
-      <table class="data-table">
-        <thead><tr><th>HumanEval pass@1 (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
+      <table class="data-table lock-table">
+        <thead>
+          <tr>
+            <th rowspan="2">Model</th><th rowspan="2">Quantizer</th>
+            <th colspan="6" class="grp">Normal attack (%)</th>
+            <th colspan="3" class="sec">Adaptive attack, security (%)</th>
+          </tr>
+          <tr>
+            <th class="grp">Auto3<br>security</th><th>Auto3<br>HumanEval</th><th class="grp">Fixed noise<br>security</th><th>Fixed noise<br>HumanEval</th><th class="grp">Rotation<br>security</th><th>Rotation<br>HumanEval</th>
+            <th class="sec">Auto3</th><th>Fixed<br>noise</th><th>Rotation</th>
+          </tr>
+        </thead>
         <tbody>
-          <tr><td>Auto3 (3 seeds)</td><td>44.47</td><td>41.33</td><td>43.93</td><td>19.20</td><td>18.90</td><td>18.57</td></tr>
+          <tr><td rowspan="3" class="model">StarCoder-1B</td><td class="q">INT8</td><td class="grp">86.43</td><td>19.20</td><td class="grp">90.2</td><td>19.0</td><td class="grp">89.4</td><td>18.6</td><td class="sec">—</td><td>—</td><td>—</td></tr>
+          <tr><td class="q">FP4</td><td class="grp">64.87</td><td>18.90</td><td class="grp">95.8</td><td>18.6</td><td class="grp">95.2</td><td>18.1</td><td class="sec">27.0</td><td>88.5</td><td>96.7</td></tr>
+          <tr class="group-end"><td class="q">NF4</td><td class="grp">65.13</td><td>18.57</td><td class="grp">93.1</td><td>16.8</td><td class="grp">97.4</td><td>17.9</td><td class="sec">28.6</td><td>91.8</td><td>97.6</td></tr>
+          <tr><td rowspan="3" class="model">Phi-2-2.7B</td><td class="q">INT8</td><td class="grp">99.50</td><td>44.47</td><td class="grp">99.4</td><td>43.2</td><td class="grp">99.4</td><td>45.5</td><td class="sec">—</td><td>—</td><td>—</td></tr>
+          <tr><td class="q">FP4</td><td class="grp">98.47</td><td>41.33</td><td class="grp">99.6</td><td>41.1</td><td class="grp">99.7</td><td>41.6</td><td class="sec">30.8</td><td>78.2</td><td>100.0</td></tr>
+          <tr><td class="q">NF4</td><td class="grp">94.37</td><td>43.93</td><td class="grp">97.4</td><td>42.6</td><td class="grp">99.4</td><td>41.6</td><td class="sec">32.8</td><td>88.2</td><td>99.4</td></tr>
         </tbody>
       </table>
-      <table class="data-table">
-        <thead><tr><th>Auto3 vs. attacked model</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
+      <p class="note center lock-note">Auto3 = mean of 3 seeds · Fixed noise = Gaussian σ = 1e-3, seed 11 · Rotation = random function-preserving rotation, seed 11 · HumanEval = pass@1<br>Adaptive = attack built against Auto3; INT8 omitted because that attack is not stealthy in full precision</p>
+    </section>
+
+    <!-- 6 · Beyond quantization -->
+    <section class="slide" id="slide-beyond" data-title="Beyond quantization">
+      <div class="slide-head">
+        <p class="kicker">Generalize</p>
+        <h2>Beyond quantization</h2>
+      </div>
+      <table class="data-table lock-table wide-text">
+        <thead>
+          <tr><th>Environment change</th><th class="grp">Attack</th><th class="grp">Backdoor hides in</th><th class="grp">Status</th></tr>
+        </thead>
         <tbody>
-          <tr><td>Error ÷ normal quantization error</td><td>1.509</td><td>1.010</td><td>1.018</td><td>2.056</td><td>1.011</td><td>1.020</td></tr>
+          <tr><td>Quantization: FP16 → INT8 / FP4 / NF4</td><td class="grp">Egashira QCB</td><td class="grp">Weight rounding</td><td class="grp">Defended, 6 / 6</td></tr>
+          <tr><td>Quantization: GPTQ / AWQ / GGUF</td><td class="grp">Widening the Gap</td><td class="grp">Large outliers</td><td class="grp">Toy only</td></tr>
+          <tr><td>Compiler: eager → torch.compile / TVM / ONNX Runtime</td><td class="grp">DcL-BD</td><td class="grp">Bias β before ReLU</td><td class="grp">Defended, 9 / 9</td></tr>
+          <tr><td>Precision: FP32 → TF32 / FP16 / BF16 / CPU</td><td class="grp">NeuGo</td><td class="grp">Crafted near-tie inputs</td><td class="grp">Partial</td></tr>
+          <tr><td>Hardware platform</td><td class="grp">Hardware-triggered</td><td class="grp">—</td><td class="grp">Not studied</td></tr>
         </tbody>
       </table>
     </section>
 
-    <!-- 5 · Q4 -->
-    <section class="slide" id="slide-5" data-title="Q4">
+    <!-- 7 · One insight -->
+    <section class="slide" id="slide-insight" data-title="One insight">
       <div class="slide-head">
-        <p class="kicker">Q4</p>
-        <h2>Is the backdoor sensitive?</h2>
+        <p class="kicker">Insight</p>
+        <h2>Margin smaller than the environment error</h2>
       </div>
-      <table class="data-table">
-        <thead><tr><th>Code security (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
+      <table class="data-table lock-table wide-text">
+        <thead>
+          <tr><th>Attack</th><th class="grp">Decision line</th><th class="grp">Margin</th><th class="grp">Environment error ε</th><th class="grp">Margin ÷ ε</th></tr>
+        </thead>
         <tbody>
-          <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
-          <tr><td>Small noise (Auto3)</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
-          <tr><td>Larger noise (Gaussian σ = 1e-3)</td><td>99.4</td><td>99.6</td><td>97.4</td><td>90.2</td><td>95.8</td><td>93.1</td></tr>
+          <tr><td>Egashira QCB</td><td class="grp">Rounding line</td><td class="grp tbd">—</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
+          <tr><td>DcL-BD</td><td class="grp">ReLU threshold</td><td class="grp">4.0e-5</td><td class="grp">≈ 1e-3 (compile gap)</td><td class="grp">≈ 0.04</td></tr>
+          <tr><td>NeuGo</td><td class="grp">Top-1 vs. top-2 logit</td><td class="grp">1.9e-5 (median)</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
         </tbody>
       </table>
-      <table class="data-table">
-        <thead><tr><th>HumanEval pass@1 (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
-        <tbody>
-          <tr><td>Small noise (Auto3)</td><td>44.47</td><td>41.33</td><td>43.93</td><td>19.20</td><td>18.90</td><td>18.57</td></tr>
-          <tr><td>Larger noise (Gaussian σ = 1e-3)</td><td>43.2</td><td>41.1</td><td>42.6</td><td>19.0</td><td>18.6</td><td>16.8</td></tr>
-        </tbody>
-      </table>
-      <p class="answer center">Yes. A limited perturbation breaks it, and a larger one breaks it more, while HumanEval stays.</p>
+      <div class="two-col">
+        <div class="flow-box"><strong>Edge in weight coordinates</strong><span>Quantization · rotation removes it</span></div>
+        <div class="flow-box"><strong>Edge in function values</strong><span>Compiler, precision · values must change</span></div>
+      </div>
+      <p class="note center lock-note">— = not measured yet</p>
+    </section>
+
+    <!-- 8 · One pipeline -->
+    <section class="slide" id="slide-pipeline" data-title="One pipeline">
+      <div class="slide-head">
+        <p class="kicker">Approach</p>
+        <h2>One fixed pipeline, run on every checkpoint</h2>
+      </div>
+      <div class="flow pipe">
+        <div class="flow-box"><strong>1 · Outlier isolation</strong><span>|w| &gt; 8 × group median kept in FP16</span><em>Widening the Gap · toy</em></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><strong>2 · Noise or rotation</strong><span>On all weights</span><em>QCB · 6 / 6</em></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><strong>3 · Bias shift</strong><span>β − δ before ReLU, δ = 1e-3</span><em>DcL-BD · 9 / 9</em></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box accent"><strong>Deploy</strong><span>Quantize · compile · change precision</span></div>
+      </div>
+      <p class="answer center">Attack type unknown · fixed parameters · no training. All three steps together: not tested yet.</p>
     </section>
 
     <!-- 9 · Compiler backdoor (DcL-BD) -->
     <section class="slide" id="slide-compiler" data-title="Compiler backdoor">
       <div class="slide-head">
-        <p class="kicker">DcL-BD</p>
+        <p class="kicker">Result · DcL-BD</p>
         <h2>Compiler backdoor</h2>
       </div>
       <table class="data-table lock-table">
@@ -215,6 +215,127 @@
           <tr><td class="q">ONNX Runtime</td><td class="grp">1.38</td><td>100.00</td><td>1.36</td><td class="sec">76.73</td><td>76.58</td></tr>
         </tbody>
       </table>
+      <p class="note center lock-note">Weight noise σ = 1e-3 instead of bias shift (ConvNet, torch.compile, 5 seeds): ASR after compile 97.40 · 36.01 · 89.32 · 35.59 · 99.22</p>
+    </section>
+
+    <!-- 10 · Precision backdoor (NeuGo) -->
+    <section class="slide" id="slide-neugo" data-title="Precision backdoor">
+      <div class="slide-head">
+        <p class="kicker">Result · NeuGo · ResNet18 · 200 crafted inputs</p>
+        <h2>Precision backdoor</h2>
+      </div>
+      <table class="data-table lock-table wide-text">
+        <thead>
+          <tr><th>Noise on</th><th class="grp">Weights perturbed</th><th class="grp">σ</th><th class="grp">Crafted inputs<br>inconsistent (%)</th><th class="grp">Clean agreement<br>with original (%)</th></tr>
+        </thead>
+        <tbody>
+          <tr class="ref"><td>No defense</td><td class="grp">—</td><td class="grp">0</td><td class="grp">76.50</td><td class="grp">100.00</td></tr>
+          <tr><td>All layers</td><td class="grp">100%</td><td class="grp">1e-3</td><td class="grp">46.17</td><td class="grp">99.67</td></tr>
+          <tr><td>Late layers (layer4, fc)</td><td class="grp">76.19%</td><td class="grp">1e-2</td><td class="grp">32.50</td><td class="grp">99.00</td></tr>
+          <tr><td>All layers</td><td class="grp">100%</td><td class="grp">3e-3</td><td class="grp">31.67</td><td class="grp">98.50</td></tr>
+          <tr><td>All layers</td><td class="grp">100%</td><td class="grp">5e-3</td><td class="grp">22.67</td><td class="grp">96.67</td></tr>
+          <tr><td>Early layers (conv1 – layer3)</td><td class="grp">23.81%</td><td class="grp">1e-2</td><td class="grp">16.83</td><td class="grp">93.00</td></tr>
+          <tr><td>All layers</td><td class="grp">100%</td><td class="grp">1e-2</td><td class="grp">14.00</td><td class="grp">93.00</td></tr>
+        </tbody>
+      </table>
+      <p class="answer center">One trade-off curve: where the noise goes does not matter. What remains is mostly BF16.</p>
+      <p class="note center lock-note">Inconsistent = label differs from GPU FP32 under TF32, FP16, BF16 or CPU · clean inputs: 3.00 · noise scaled by each tensor’s std · mean of seeds 0–2</p>
+    </section>
+
+    <!-- 11 · Limits -->
+    <section class="slide" id="slide-limits" data-title="Limits">
+      <div class="slide-head">
+        <p class="kicker">Limits</p>
+        <h2>What it does not cover yet</h2>
+      </div>
+      <div class="grid-2x2">
+        <div class="flow-box"><strong>Widening the Gap</strong><span>Large margin · needs outlier isolation · toy only</span></div>
+        <div class="flow-box"><strong>BF16 wall</strong><span>Noise alone stops at a trade-off</span></div>
+        <div class="flow-box"><strong>Trojan operator</strong><span>The bug is in code · weights cannot fix it</span></div>
+        <div class="flow-box"><strong>Adaptive attack</strong><span>A fixed δ can be pre-compensated</span></div>
+      </div>
+    </section>
+
+    <!-- 12 · Next steps (template) -->
+    <section class="slide" id="slide-next" data-title="Next steps">
+      <div class="slide-head">
+        <p class="kicker">Next steps</p>
+        <h2>Testing the whole pipeline</h2>
+      </div>
+      <table class="data-table lock-table wide-text">
+        <thead>
+          <tr><th>Experiment</th><th class="grp">Setting</th><th class="grp">ASR after compile (%)</th><th class="grp">Clean accuracy (%)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Channel scaling + bias shift</td><td class="grp">ConvNet · torch.compile</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
+          <tr><td>Weight noise + bias shift</td><td class="grp">ConvNet · torch.compile</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
+          <tr><td>Random δ per channel</td><td class="grp">ConvNet · torch.compile</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
+          <tr><td>Pipeline on clean models</td><td class="grp">CIFAR-10 · CIFAR-100</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
+        </tbody>
+      </table>
+      <p class="note center lock-note">— = running</p>
+    </section>
+
+    <!-- 13 · Backup: Q1 -->
+    <section class="slide" id="slide-2" data-title="Backup · Q1">
+      <div class="slide-head">
+        <p class="kicker">Backup · Q1 · RQ6 · RQ7</p>
+        <h2>Where is the backdoor?</h2>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>Code security (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
+        <tbody>
+          <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
+          <tr><td>Noise on outliers only</td><td>38.6</td><td>50.8</td><td>48.3</td><td>31.3</td><td>37.4</td><td>34.6</td></tr>
+          <tr><td>Noise on ordinary weights only</td><td>99.7</td><td>72.5</td><td>74.5</td><td>85.3</td><td>48.5</td><td>50.3</td></tr>
+          <tr><td>Noise on all weights</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
+        </tbody>
+      </table>
+      <p class="answer center">Spread over many ordinary weights, not a few outliers.</p>
+    </section>
+
+    <!-- 14 · Backup: Q3 -->
+    <section class="slide" id="slide-4" data-title="Backup · Q3">
+      <div class="slide-head">
+        <p class="kicker">Backup · Q3</p>
+        <h2>Why does performance stay?</h2>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>HumanEval pass@1 (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
+        <tbody>
+          <tr><td>Auto3 (3 seeds)</td><td>44.47</td><td>41.33</td><td>43.93</td><td>19.20</td><td>18.90</td><td>18.57</td></tr>
+        </tbody>
+      </table>
+      <table class="data-table">
+        <thead><tr><th>Auto3 vs. attacked model</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
+        <tbody>
+          <tr><td>Error ÷ normal quantization error</td><td>1.509</td><td>1.010</td><td>1.018</td><td>2.056</td><td>1.011</td><td>1.020</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 15 · Backup: Q4 -->
+    <section class="slide" id="slide-5" data-title="Backup · Q4">
+      <div class="slide-head">
+        <p class="kicker">Backup · Q4</p>
+        <h2>Is the backdoor sensitive?</h2>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>Code security (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
+        <tbody>
+          <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
+          <tr><td>Small noise (Auto3)</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
+          <tr><td>Larger noise (Gaussian σ = 1e-3)</td><td>99.4</td><td>99.6</td><td>97.4</td><td>90.2</td><td>95.8</td><td>93.1</td></tr>
+        </tbody>
+      </table>
+      <table class="data-table">
+        <thead><tr><th>HumanEval pass@1 (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
+        <tbody>
+          <tr><td>Small noise (Auto3)</td><td>44.47</td><td>41.33</td><td>43.93</td><td>19.20</td><td>18.90</td><td>18.57</td></tr>
+          <tr><td>Larger noise (Gaussian σ = 1e-3)</td><td>43.2</td><td>41.1</td><td>42.6</td><td>19.0</td><td>18.6</td><td>16.8</td></tr>
+        </tbody>
+      </table>
+      <p class="answer center">Yes. A limited perturbation breaks it, and a larger one breaks it more, while HumanEval stays.</p>
     </section>
   </main>
 

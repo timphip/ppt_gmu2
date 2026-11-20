@@ -11,7 +11,7 @@
   <header class="topbar" aria-label="Presentation controls">
     <button class="brand" data-go="0" aria-label="Go to title slide">NUMERICAL DEFENSE</button>
     <div class="progress-track" aria-hidden="true"><div id="progress"></div></div>
-    <span id="counter" class="counter">1 / 15</span>
+    <span id="counter" class="counter">1 / 13</span>
     <button id="overviewBtn" class="icon-button" aria-label="Open slide overview" title="Overview (O)">☷</button>
     <button id="fullscreenBtn" class="icon-button" aria-label="Enter fullscreen" title="Fullscreen (F)">⛶</button>
   </header>
@@ -74,6 +74,24 @@
         </tbody>
       </table>
       <p class="note center lock-note">Backdoor model after Step 3, quantized · Auto3 values = mean of 3 seeds</p>
+    </section>
+
+    <!-- 4 · Where: Q1 -->
+    <section class="slide" id="slide-2" data-title="Where · Q1">
+      <div class="slide-head">
+        <p class="kicker">Where it hides · Q1 · RQ6 · RQ7</p>
+        <h2>Where is the backdoor?</h2>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>Code security (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
+        <tbody>
+          <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
+          <tr><td>Noise on outliers only</td><td>38.6</td><td>50.8</td><td>48.3</td><td>31.3</td><td>37.4</td><td>34.6</td></tr>
+          <tr><td>Noise on ordinary weights only</td><td>99.7</td><td>72.5</td><td>74.5</td><td>85.3</td><td>48.5</td><td>50.3</td></tr>
+          <tr><td>Noise on all weights</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
+        </tbody>
+      </table>
+      <p class="answer center">Spread over many ordinary weights, not a few outliers.</p>
     </section>
 
     <!-- 4 · Why: Q2 -->
@@ -275,67 +293,6 @@
       <p class="note center lock-note">— = running</p>
     </section>
 
-    <!-- 13 · Backup: Q1 -->
-    <section class="slide" id="slide-2" data-title="Backup · Q1">
-      <div class="slide-head">
-        <p class="kicker">Backup · Q1 · RQ6 · RQ7</p>
-        <h2>Where is the backdoor?</h2>
-      </div>
-      <table class="data-table">
-        <thead><tr><th>Code security (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
-        <tbody>
-          <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
-          <tr><td>Noise on outliers only</td><td>38.6</td><td>50.8</td><td>48.3</td><td>31.3</td><td>37.4</td><td>34.6</td></tr>
-          <tr><td>Noise on ordinary weights only</td><td>99.7</td><td>72.5</td><td>74.5</td><td>85.3</td><td>48.5</td><td>50.3</td></tr>
-          <tr><td>Noise on all weights</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
-        </tbody>
-      </table>
-      <p class="answer center">Spread over many ordinary weights, not a few outliers.</p>
-    </section>
-
-    <!-- 14 · Backup: Q3 -->
-    <section class="slide" id="slide-4" data-title="Backup · Q3">
-      <div class="slide-head">
-        <p class="kicker">Backup · Q3</p>
-        <h2>Why does performance stay?</h2>
-      </div>
-      <table class="data-table">
-        <thead><tr><th>HumanEval pass@1 (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
-        <tbody>
-          <tr><td>Auto3 (3 seeds)</td><td>44.47</td><td>41.33</td><td>43.93</td><td>19.20</td><td>18.90</td><td>18.57</td></tr>
-        </tbody>
-      </table>
-      <table class="data-table">
-        <thead><tr><th>Auto3 vs. attacked model</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
-        <tbody>
-          <tr><td>Error ÷ normal quantization error</td><td>1.509</td><td>1.010</td><td>1.018</td><td>2.056</td><td>1.011</td><td>1.020</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- 15 · Backup: Q4 -->
-    <section class="slide" id="slide-5" data-title="Backup · Q4">
-      <div class="slide-head">
-        <p class="kicker">Backup · Q4</p>
-        <h2>Is the backdoor sensitive?</h2>
-      </div>
-      <table class="data-table">
-        <thead><tr><th>Code security (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
-        <tbody>
-          <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
-          <tr><td>Small noise (Auto3)</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
-          <tr><td>Larger noise (Gaussian σ = 1e-3)</td><td>99.4</td><td>99.6</td><td>97.4</td><td>90.2</td><td>95.8</td><td>93.1</td></tr>
-        </tbody>
-      </table>
-      <table class="data-table">
-        <thead><tr><th>HumanEval pass@1 (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
-        <tbody>
-          <tr><td>Small noise (Auto3)</td><td>44.47</td><td>41.33</td><td>43.93</td><td>19.20</td><td>18.90</td><td>18.57</td></tr>
-          <tr><td>Larger noise (Gaussian σ = 1e-3)</td><td>43.2</td><td>41.1</td><td>42.6</td><td>19.0</td><td>18.6</td><td>16.8</td></tr>
-        </tbody>
-      </table>
-      <p class="answer center">Yes. A limited perturbation breaks it, and a larger one breaks it more, while HumanEval stays.</p>
-    </section>
   </main>
 
   <nav class="nav-controls" aria-label="Slide navigation">

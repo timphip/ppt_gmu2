@@ -169,12 +169,13 @@
         <tbody>
           <tr><td>Egashira QCB</td><td class="grp">Rounding line</td><td class="grp tbd">—</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
           <tr><td>DcL-BD</td><td class="grp">ReLU threshold</td><td class="grp">4.0e-5</td><td class="grp">≈ 1e-3 (compile gap)</td><td class="grp">≈ 0.04</td></tr>
-          <tr><td>NeuGo</td><td class="grp">Top-1 vs. top-2 logit</td><td class="grp">1.9e-5 (median)</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
+          <tr><td>NeuGo · our near-tie inputs</td><td class="grp">Top-1 vs. top-2 logit</td><td class="grp">1.9e-5 (median)</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
+          <tr><td>NeuGo · real inputs (VGG19-BN, 3)</td><td class="grp">Top-1 vs. top-2 logit</td><td class="grp">≈ 1.7</td><td class="grp">≤ 7.9e-2 (BF16)</td><td class="grp">≥ 22 · no flip</td></tr>
         </tbody>
       </table>
       <div class="two-col">
-        <div class="flow-box"><strong>Edge in weight coordinates</strong><span>Quantization · rotation removes it</span></div>
-        <div class="flow-box"><strong>Edge in function values</strong><span>Compiler, precision · values must change</span></div>
+        <div class="flow-box"><strong>Attack: margin &lt; ε</strong><span>The environment error pushes the value across the line</span></div>
+        <div class="flow-box"><strong>Defense: push margin above ε</strong><span>ε is fixed by the environment · only the value moves</span></div>
       </div>
       <p class="note center lock-note">— = not measured yet</p>
     </section>

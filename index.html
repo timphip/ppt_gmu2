@@ -186,7 +186,7 @@
         <h2>One fixed pipeline, run on every checkpoint</h2>
       </div>
       <div class="flow pipe">
-        <div class="flow-box"><strong>1 · Outlier isolation</strong><span>|w| &gt; 8 × group median kept in FP16</span><em>Widening the Gap · toy</em></div>
+        <div class="flow-box"><strong>1 · Outlier isolation</strong><span>|w| &gt; 8 × group median kept in FP16</span><em>Outlier QCB · toy</em></div>
         <div class="flow-arrow">→</div>
         <div class="flow-box"><strong>2 · Noise or rotation</strong><span>On all weights</span><em>QCB · 6 / 6</em></div>
         <div class="flow-arrow">→</div>
@@ -261,7 +261,7 @@
         <h2>What it does not cover yet</h2>
       </div>
       <div class="grid-2x2">
-        <div class="flow-box"><strong>Widening the Gap</strong><span>Large margin · needs outlier isolation · toy only</span></div>
+        <div class="flow-box"><strong>Outlier QCB</strong><span>Large margin · needs outlier isolation · toy only</span></div>
         <div class="flow-box"><strong>BF16 wall</strong><span>Noise alone stops at a trade-off</span></div>
         <div class="flow-box"><strong>Trojan operator</strong><span>The bug is in code · weights cannot fix it</span></div>
         <div class="flow-box"><strong>Adaptive attack</strong><span>A fixed δ can be pre-compensated</span></div>

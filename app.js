@@ -60,7 +60,7 @@
     button.addEventListener('click', () => { overview.close(); goTo(index); });
     overviewGrid.appendChild(button);
   });
-  document.getElementById('overviewBtn').addEventListener('click', () => overview.showModal());
+  document.getElementById('overviewBtn')?.addEventListener('click', () => overview.showModal());
   document.getElementById('closeOverview').addEventListener('click', () => overview.close());
   overview.addEventListener('click', event => { if (event.target === overview) overview.close(); });
 

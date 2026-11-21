@@ -62,7 +62,7 @@ h3 { margin: 0 0 14px; font-size: 22px; }
 
 /* Cover */
 .cover { justify-content: center; }
-.cover h1 { margin: 0; font-size: 120px; line-height: .95; letter-spacing: -.055em; }
+.cover h1 { margin: 0; font-size: 104px; line-height: .95; letter-spacing: -.055em; text-align: center; white-space: nowrap; }
 .cover-sub { margin: 26px 0 0; max-width: 1000px; font-size: 32px; line-height: 1.35; color: var(--muted); }
 
 /* Layout helpers */

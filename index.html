@@ -147,11 +147,11 @@
           <tr><th>Environment change</th><th class="grp">Attack</th><th class="grp">Backdoor hides in</th><th class="grp">Status</th></tr>
         </thead>
         <tbody>
-          <tr><td>Quantization: full precision → INT8 / FP4 / NF4</td><td class="grp">Quantization-Conditioned Backdoor</td><td class="grp">Weight rounding</td><td class="grp">Defended, 6 / 6</td></tr>
+          <tr><td>Quantization: full precision → bitsandbytes INT8 / FP4 / NF4</td><td class="grp">Quantization-Conditioned Backdoor</td><td class="grp">Weight rounding</td><td class="grp">Defended, 6 / 6</td></tr>
           <tr><td>Compiler: eager → torch.compile / TVM / ONNX Runtime</td><td class="grp">DcL-BD</td><td class="grp">Bias β before ReLU</td><td class="grp">Defended, 9 / 9</td></tr>
           <tr><td>Precision: FP32 → TF32 / FP16 / BF16 / CPU</td><td class="grp">NeuGo</td><td class="grp">Crafted near-tie inputs</td><td class="grp">Partial</td></tr>
           <tr><td>Hardware platform</td><td class="grp">Hardware-triggered</td><td class="grp">—</td><td class="grp">Not studied</td></tr>
-          <tr><td>Quantization: GPTQ / AWQ / GGUF</td><td class="grp">Outlier QCB</td><td class="grp">Large outliers</td><td class="grp">Toy only</td></tr>
+          <tr><td>Quantization: BF16 → INT8 / FP4 / NF4, GPTQ, AWQ, GGUF, HQQ, SINQ, AutoRound</td><td class="grp">Outlier QCB</td><td class="grp">Large outliers</td><td class="grp">Toy only</td></tr>
         </tbody>
       </table>
     </section>

@@ -264,3 +264,4 @@ td.no { color: var(--muted); }
 .overview-grid span { margin-top: 6px; font-size: 13px; color: var(--muted); }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+#slide-beyond .lock-table td.grp, #slide-beyond .lock-table th.grp { white-space: nowrap; }

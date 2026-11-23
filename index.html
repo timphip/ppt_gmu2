@@ -10,7 +10,7 @@
 <body>
   <header class="topbar" aria-label="Presentation controls">
     <div class="progress-track" aria-hidden="true"><div id="progress"></div></div>
-    <span id="counter" class="counter">1 / 13</span>
+    <span id="counter" class="counter">1 / 10</span>
     <button id="fullscreenBtn" class="icon-button" aria-label="Enter fullscreen" title="Fullscreen (F)">⛶</button>
   </header>
 
@@ -86,10 +86,10 @@
           <tr><td>Noise on all weights</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
         </tbody>
       </table>
-      <p class="answer center">Spread over many ordinary weights, not a few outliers.</p>
+      <p class="answer center">The backdoor is located in the ordinary weights, not in the outliers.</p>
     </section>
 
-    <!-- 4 · Why: Q2 -->
+    <!-- 5 · Why: Q2 -->
     <section class="slide" id="slide-3" data-title="Why · Q2">
       <div class="slide-head">
         <p class="kicker">Why it works · Q2 · RQ1 · RQ3</p>
@@ -106,11 +106,55 @@
       <p class="answer center">It flips weights near the rounding line and breaks the attacker’s rounding pattern.</p>
     </section>
 
-    <!-- 5 · Fix: fixed noise, rotation vs Auto3 -->
+    <!-- 6 · Beyond quantization -->
+    <section class="slide" id="slide-beyond" data-title="Beyond quantization">
+      <div class="slide-head">
+        <p class="kicker">Generalize</p>
+        <h2>Beyond quantization</h2>
+      </div>
+      <table class="data-table lock-table wide-text">
+        <thead>
+          <tr><th>Environment change</th><th class="grp">Attack</th><th class="grp">Backdoor hides in</th><th class="grp">Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>full precision → bitsandbytes INT8 / FP4 / NF4</td><td class="grp">Quantization-Conditioned Backdoor</td><td class="grp">Weight rounding</td><td class="grp">Defended, 6 / 6</td></tr>
+          <tr><td>eager → torch.compile / TVM / ONNX Runtime</td><td class="grp">Compiler</td><td class="grp">Bias β before ReLU</td><td class="grp">Defended, 9 / 9</td></tr>
+          <tr><td>FP32 → FP16</td><td class="grp">Precision</td><td class="grp">Crafted near-tie inputs</td><td class="grp">Defended, 4 / 4</td></tr>
+          <tr><td>BF16 → INT8 / FP4 / NF4, GPTQ, AWQ, GGUF, HQQ, SINQ, AutoRound</td><td class="grp">Outlier Quantization-Conditioned Backdoor</td><td class="grp">Large outliers</td><td class="grp">Toy only</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 7 · One insight -->
+    <section class="slide" id="slide-insight" data-title="One insight">
+      <div class="slide-head">
+        <p class="kicker">Insight</p>
+        <h2>Margin smaller than the environment error</h2>
+      </div>
+      <table class="data-table lock-table wide-text">
+        <thead>
+          <tr><th>Attack</th><th class="grp">Decision line</th><th class="grp">Margin</th><th class="grp">Environment error ε</th><th class="grp">Margin ÷ ε</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Egashira QCB</td><td class="grp">Rounding line</td><td class="grp tbd">—</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
+          <tr><td>DcL-BD</td><td class="grp">ReLU threshold</td><td class="grp">4.0e-5</td><td class="grp">≈ 1e-3 (compile gap)</td><td class="grp">≈ 0.04</td></tr>
+          <tr><td>NeuGo · crafted inputs (ResNet-50, 3 flips)</td><td class="grp">Top-1 vs. top-2 logit</td><td class="grp">0.006–0.024</td><td class="grp">0.026–0.041 (FP16)</td><td class="grp">0.23–0.75</td></tr>
+          <tr><td>NeuGo · authors’ inputs (VGG19-BN, 3)</td><td class="grp">Top-1 vs. top-2 logit</td><td class="grp">≈ 1.7</td><td class="grp">≤ 7.9e-2 (BF16)</td><td class="grp">≥ 22 · no flip</td></tr>
+        </tbody>
+      </table>
+      <div class="two-col">
+        <div class="flow-box"><strong>Attack: margin &lt; ε</strong><span>The environment error pushes the value across the line</span></div>
+        <div class="flow-box"><strong>Defense: push margin above ε</strong><span>ε is fixed by the environment · only the value moves</span></div>
+      </div>
+      <p class="note center lock-note">— = not measured yet</p>
+    </section>
+
+    <!-- 8 · Fix: fixed noise, rotation vs Auto3 -->
     <section class="slide" id="slide-fixed" data-title="Fix">
       <div class="slide-head">
-        <p class="kicker">Fix · Quantization backdoor</p>
-        <h2>Fixed noise and rotation vs. Auto3</h2>
+        <p class="kicker">Result</p>
+        <h2>Primary result: Quantization</h2>
+        <p class="lead">Fixed noise and rotation vs. Auto3</p>
       </div>
       <table class="data-table lock-table">
         <thead>
@@ -133,76 +177,13 @@
           <tr><td class="q">NF4</td><td class="grp">94.37</td><td>43.93</td><td class="grp">97.4</td><td>42.6</td><td class="grp">99.4</td><td>41.6</td><td class="sec">32.8</td><td>88.2</td><td>99.4</td></tr>
         </tbody>
       </table>
-      <p class="note center lock-note">Auto3 = mean of 3 seeds · Fixed noise = Gaussian σ = 1e-3, seed 11 · Rotation = random function-preserving rotation, seed 11 · HumanEval = pass@1<br>Adaptive = attack built against Auto3; INT8 omitted because that attack is not stealthy in full precision</p>
-    </section>
-
-    <!-- 6 · Beyond quantization -->
-    <section class="slide" id="slide-beyond" data-title="Beyond quantization">
-      <div class="slide-head">
-        <p class="kicker">Generalize</p>
-        <h2>Beyond quantization</h2>
-      </div>
-      <table class="data-table lock-table wide-text">
-        <thead>
-          <tr><th>Environment change</th><th class="grp">Attack</th><th class="grp">Backdoor hides in</th><th class="grp">Status</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>full precision → bitsandbytes INT8 / FP4 / NF4</td><td class="grp">Quantization-Conditioned Backdoor</td><td class="grp">Weight rounding</td><td class="grp">Defended, 6 / 6</td></tr>
-          <tr><td>eager → torch.compile / TVM / ONNX Runtime</td><td class="grp">Compiler</td><td class="grp">Bias β before ReLU</td><td class="grp">Defended, 9 / 9</td></tr>
-          <tr><td>FP32 → TF32 / FP16 / BF16 / CPU</td><td class="grp">Precision</td><td class="grp">Crafted near-tie inputs</td><td class="grp">Partial</td></tr>
-          <tr><td>—</td><td class="grp">Hardware Platform</td><td class="grp">—</td><td class="grp">Not studied</td></tr>
-          <tr><td>BF16 → INT8 / FP4 / NF4, GPTQ, AWQ, GGUF, HQQ, SINQ, AutoRound</td><td class="grp">Outlier Quantization-Conditioned Backdoor</td><td class="grp">Large outliers</td><td class="grp">Toy only</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- 7 · One insight -->
-    <section class="slide" id="slide-insight" data-title="One insight">
-      <div class="slide-head">
-        <p class="kicker">Insight</p>
-        <h2>Margin smaller than the environment error</h2>
-      </div>
-      <table class="data-table lock-table wide-text">
-        <thead>
-          <tr><th>Attack</th><th class="grp">Decision line</th><th class="grp">Margin</th><th class="grp">Environment error ε</th><th class="grp">Margin ÷ ε</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Egashira QCB</td><td class="grp">Rounding line</td><td class="grp tbd">—</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
-          <tr><td>DcL-BD</td><td class="grp">ReLU threshold</td><td class="grp">4.0e-5</td><td class="grp">≈ 1e-3 (compile gap)</td><td class="grp">≈ 0.04</td></tr>
-          <tr><td>NeuGo · our near-tie inputs</td><td class="grp">Top-1 vs. top-2 logit</td><td class="grp">1.9e-5 (median)</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
-          <tr><td>NeuGo · real inputs (VGG19-BN, 3)</td><td class="grp">Top-1 vs. top-2 logit</td><td class="grp">≈ 1.7</td><td class="grp">≤ 7.9e-2 (BF16)</td><td class="grp">≥ 22 · no flip</td></tr>
-        </tbody>
-      </table>
-      <div class="two-col">
-        <div class="flow-box"><strong>Attack: margin &lt; ε</strong><span>The environment error pushes the value across the line</span></div>
-        <div class="flow-box"><strong>Defense: push margin above ε</strong><span>ε is fixed by the environment · only the value moves</span></div>
-      </div>
-      <p class="note center lock-note">— = not measured yet</p>
-    </section>
-
-    <!-- 8 · One pipeline -->
-    <section class="slide" id="slide-pipeline" data-title="One pipeline">
-      <div class="slide-head">
-        <p class="kicker">Approach</p>
-        <h2>One fixed pipeline, run on every checkpoint</h2>
-      </div>
-      <div class="flow pipe">
-        <div class="flow-box"><strong>1 · Outlier isolation</strong><span>|w| &gt; 8 × group median kept in FP16</span><em>Outlier QCB · toy</em></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-box"><strong>2 · Noise or rotation</strong><span>On all weights</span><em>QCB · 6 / 6</em></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-box"><strong>3 · Bias shift</strong><span>β − δ before ReLU, δ = 1e-3</span><em>DcL-BD · 9 / 9</em></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-box accent"><strong>Deploy</strong><span>Quantize · compile · change precision</span></div>
-      </div>
-      <p class="answer center">Attack type unknown · fixed parameters · no training. All three steps together: not tested yet.</p>
     </section>
 
     <!-- 9 · Compiler backdoor (DcL-BD) -->
     <section class="slide" id="slide-compiler" data-title="Compiler backdoor">
       <div class="slide-head">
-        <p class="kicker">Result · DcL-BD</p>
-        <h2>Compiler backdoor</h2>
+        <p class="kicker">Result</p>
+        <h2>Primary result: Compiler</h2>
       </div>
       <table class="data-table lock-table">
         <thead>
@@ -228,66 +209,32 @@
           <tr><td class="q">ONNX Runtime</td><td class="grp">1.38</td><td>100.00</td><td>1.36</td><td class="sec">76.73</td><td>76.58</td></tr>
         </tbody>
       </table>
-      <p class="note center lock-note">Weight noise σ = 1e-3 instead of bias shift (ConvNet, torch.compile, 5 seeds): ASR after compile 97.40 · 36.01 · 89.32 · 35.59 · 99.22</p>
     </section>
 
     <!-- 10 · Precision backdoor (NeuGo) -->
     <section class="slide" id="slide-neugo" data-title="Precision backdoor">
       <div class="slide-head">
-        <p class="kicker">Result · NeuGo · ResNet18 · 200 crafted inputs</p>
-        <h2>Precision backdoor</h2>
+        <p class="kicker">Result</p>
+        <h2>Primary result: Precision</h2>
       </div>
       <table class="data-table lock-table wide-text">
         <thead>
-          <tr><th>Noise on</th><th class="grp">Weights perturbed</th><th class="grp">σ</th><th class="grp">Crafted inputs<br>inconsistent (%)</th><th class="grp">Clean agreement<br>with original (%)</th></tr>
+          <tr>
+            <th rowspan="2">Inputs</th>
+            <th colspan="4" class="grp">Top-1 differs between FP32 and FP16</th>
+          </tr>
+          <tr>
+            <th class="grp">No defense</th><th>+ weight noise<br>σ = 1e-3</th><th>σ = 3e-3</th><th>σ = 1e-2</th>
+          </tr>
         </thead>
         <tbody>
-          <tr class="ref"><td>No defense</td><td class="grp">—</td><td class="grp">0</td><td class="grp">76.50</td><td class="grp">100.00</td></tr>
-          <tr><td>All layers</td><td class="grp">100%</td><td class="grp">1e-3</td><td class="grp">46.17</td><td class="grp">99.67</td></tr>
-          <tr><td>Late layers (layer4, fc)</td><td class="grp">76.19%</td><td class="grp">1e-2</td><td class="grp">32.50</td><td class="grp">99.00</td></tr>
-          <tr><td>All layers</td><td class="grp">100%</td><td class="grp">3e-3</td><td class="grp">31.67</td><td class="grp">98.50</td></tr>
-          <tr><td>All layers</td><td class="grp">100%</td><td class="grp">5e-3</td><td class="grp">22.67</td><td class="grp">96.67</td></tr>
-          <tr><td>Early layers (conv1 – layer3)</td><td class="grp">23.81%</td><td class="grp">1e-2</td><td class="grp">16.83</td><td class="grp">93.00</td></tr>
-          <tr><td>All layers</td><td class="grp">100%</td><td class="grp">1e-2</td><td class="grp">14.00</td><td class="grp">93.00</td></tr>
+          <tr><td>Crafted</td><td class="grp">4 / 30</td><td>0 / 4</td><td>0 / 4</td><td>0 / 4</td></tr>
+          <tr><td>Clean</td><td class="grp">0 / 30</td><td>—</td><td>—</td><td>—</td></tr>
         </tbody>
       </table>
-      <p class="answer center">One trade-off curve: where the noise goes does not matter. What remains is mostly BF16.</p>
-      <p class="note center lock-note">Inconsistent = label differs from GPU FP32 under TF32, FP16, BF16 or CPU · clean inputs: 3.00 · noise scaled by each tensor’s std · mean of seeds 0–2</p>
+      <p class="answer center">Every flip: FP32 margin 0.006–0.024 &lt; FP16 shift 0.026–0.041. Weight noise moves the input off the line.</p>
     </section>
 
-    <!-- 11 · Limits -->
-    <section class="slide" id="slide-limits" data-title="Limits">
-      <div class="slide-head">
-        <p class="kicker">Limits</p>
-        <h2>What it does not cover yet</h2>
-      </div>
-      <div class="grid-2x2">
-        <div class="flow-box"><strong>Outlier QCB</strong><span>Large margin · needs outlier isolation · toy only</span></div>
-        <div class="flow-box"><strong>BF16 wall</strong><span>Noise alone stops at a trade-off</span></div>
-        <div class="flow-box"><strong>Trojan operator</strong><span>The bug is in code · weights cannot fix it</span></div>
-        <div class="flow-box"><strong>Adaptive attack</strong><span>A fixed δ can be pre-compensated</span></div>
-      </div>
-    </section>
-
-    <!-- 12 · Next steps (template) -->
-    <section class="slide" id="slide-next" data-title="Next steps">
-      <div class="slide-head">
-        <p class="kicker">Next steps</p>
-        <h2>Testing the whole pipeline</h2>
-      </div>
-      <table class="data-table lock-table wide-text">
-        <thead>
-          <tr><th>Experiment</th><th class="grp">Setting</th><th class="grp">ASR after compile (%)</th><th class="grp">Clean accuracy (%)</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Channel scaling + bias shift</td><td class="grp">ConvNet · torch.compile</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
-          <tr><td>Weight noise + bias shift</td><td class="grp">ConvNet · torch.compile</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
-          <tr><td>Random δ per channel</td><td class="grp">ConvNet · torch.compile</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
-          <tr><td>Pipeline on clean models</td><td class="grp">CIFAR-10 · CIFAR-100</td><td class="grp tbd">—</td><td class="grp tbd">—</td></tr>
-        </tbody>
-      </table>
-      <p class="note center lock-note">— = running</p>
-    </section>
 
   </main>
 

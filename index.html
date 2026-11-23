@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1f2122">
   <title>Defense Inconsistency Attack</title>
-  <link rel="stylesheet" href="styles.css?v=20261123d">
+  <link rel="stylesheet" href="styles.css?v=20261123e">
 </head>
 <body>
   <header class="topbar" aria-label="Presentation controls">
@@ -133,7 +133,7 @@
       </div>
       <table class="data-table lock-table wide-text">
         <thead>
-          <tr><th>Attack</th><th class="grp">The backdoor depends on</th><th class="grp">Small change that breaks it</th><th class="grp">Result</th></tr>
+          <tr><th>Attack</th><th class="grp">The backdoor depends on</th><th class="grp">Small perturbation that disrupts it</th><th class="grp">Result</th></tr>
         </thead>
         <tbody>
           <tr><td>Quantization-Conditioned Backdoor</td><td class="grp">Exact quantized value of each weight</td><td class="grp">Weight noise σ = 1e-3<br>(10–77% of quantized values change)</td><td class="grp">Security 17.1–28.0% → 90.2–99.6%</td></tr>
@@ -142,7 +142,7 @@
           <tr><td>Outlier Quantization-Conditioned Backdoor</td><td class="grp">A few large weights that set the group scale</td><td class="grp">Outlier isolation</td><td class="grp">Toy only</td></tr>
         </tbody>
       </table>
-      <p class="answer center">Each backdoor relies on an exact numerical state; a small numerical perturbation breaks it.</p>
+      <p class="insight-goal">Common insight: each backdoor relies on an exact numerical state, a small numerical perturbation disrupts it.</p>
     </section>
 
     <!-- 8 · Fix: fixed noise, rotation vs Auto3 -->

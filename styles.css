@@ -279,3 +279,6 @@ td.no { color: var(--muted); }
 #slide-beyond .lock-table td, #slide-insight .lock-table td { font-size: 20px; }
 #slide-beyond .lock-table td:first-child, #slide-insight .lock-table td:first-child { white-space: nowrap; }
 #slide-beyond .lock-table td:nth-child(2), #slide-beyond .lock-table th:nth-child(2) { white-space: normal; line-height: 1.35; }
+
+/* Red conclusion box, same look as the Goal box in the first deck */
+.insight-goal { margin: 18px auto 0; padding: 14px 24px; width: fit-content; max-width: 100%; border: 1px solid #422d30; border-radius: 10px; background: #422d30; color: #ff6264; font-size: 28px; font-weight: 400; text-align: center; line-height: 1.4; }

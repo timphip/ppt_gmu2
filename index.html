@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1f2122">
   <title>Defense Inconsistency Attack</title>
-  <link rel="stylesheet" href="styles.css?v=20261123e">
+  <link rel="stylesheet" href="styles.css?v=20261123f">
 </head>
 <body>
   <header class="topbar" aria-label="Presentation controls">
     <div class="progress-track" aria-hidden="true"><div id="progress"></div></div>
-    <span id="counter" class="counter">1 / 10</span>
+    <span id="counter" class="counter">1 / 9</span>
     <button id="fullscreenBtn" class="icon-button" aria-label="Enter fullscreen" title="Fullscreen (F)">⛶</button>
   </header>
 
@@ -106,13 +106,13 @@
       <p class="answer center">It flips weights near the rounding line and breaks the attacker’s rounding pattern.</p>
     </section>
 
-    <!-- 6 · Beyond quantization -->
-    <section class="slide" id="slide-beyond" data-title="Beyond quantization">
+        <!-- 6 · One insight -->
+    <section class="slide" id="slide-insight" data-title="One insight">
       <div class="slide-head">
-        <p class="kicker">Generalize</p>
-        <h2>Beyond quantization</h2>
+        <p class="kicker">Insight</p>
+        <h2>Common insight (Beyond quantization)</h2>
       </div>
-      <table class="data-table lock-table wide-text">
+      <table class="data-table lock-table wide-text beyond-table">
         <thead>
           <tr><th>Attack</th><th class="grp">System change</th><th class="grp">Backdoor hides in</th><th class="grp">Status</th></tr>
         </thead>
@@ -122,15 +122,7 @@
           <tr><td>Precision</td><td class="grp">PyTorch eager, GPU, FP32<br>→ compiled / CPU / ONNX Runtime / OpenVINO / FP16</td><td class="grp">Crafted trigger inputs</td><td class="grp">Not reproduced, 0 / 150</td></tr>
         </tbody>
       </table>
-    </section>
-
-    <!-- 7 · One insight -->
-    <section class="slide" id="slide-insight" data-title="One insight">
-      <div class="slide-head">
-        <p class="kicker">Insight</p>
-        <h2>Common insight</h2>
-      </div>
-      <table class="data-table lock-table wide-text">
+      <table class="data-table lock-table wide-text insight-table">
         <thead>
           <tr><th>Attack</th><th class="grp">The backdoor depends on</th><th class="grp">Small perturbation that disrupts it</th><th class="grp">Result</th></tr>
         </thead>
@@ -143,7 +135,7 @@
       <p class="insight-goal">Common insight: each backdoor relies on an exact numerical state, a small numerical perturbation disrupts it.</p>
     </section>
 
-    <!-- 8 · Fix: fixed noise, rotation vs Auto3 -->
+    <!-- 7 · Fix: fixed noise, rotation vs Auto3 -->
     <section class="slide" id="slide-fixed" data-title="Fix">
       <div class="slide-head">
         <p class="kicker">Result</p>
@@ -173,7 +165,7 @@
       </table>
     </section>
 
-    <!-- 9 · Compiler backdoor (DcL-BD) -->
+    <!-- 8 · Compiler backdoor (DcL-BD) -->
     <section class="slide" id="slide-compiler" data-title="Compiler backdoor">
       <div class="slide-head">
         <p class="kicker">Result</p>
@@ -205,7 +197,7 @@
       </table>
     </section>
 
-    <!-- 10 · Precision backdoor (NeuGo) -->
+    <!-- 9 · Precision backdoor (NeuGo) -->
     <section class="slide" id="slide-neugo" data-title="Precision backdoor">
       <div class="slide-head">
         <p class="kicker">Result</p>

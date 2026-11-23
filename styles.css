@@ -264,7 +264,7 @@ td.no { color: var(--muted); }
 .overview-grid span { margin-top: 6px; font-size: 13px; color: var(--muted); }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-#slide-beyond .lock-table td.grp, #slide-beyond .lock-table th.grp { white-space: nowrap; }
+#slide-insight .beyond-table td.grp, #slide-insight .beyond-table th.grp { white-space: nowrap; }
 
 /* Tables: no bold, centered; numbers large, text labels smaller */
 .data-table th, .data-table td, .lock-table td.model { font-weight: 400; text-align: center; }
@@ -276,9 +276,13 @@ td.no { color: var(--muted); }
 #slide-fixed .lock-table th { font-size: 17px; }
 #slide-fixed .lock-table td { font-size: 22px; }
 .data-table td:first-child, .lock-table td.model, .lock-table td.q { font-size: 20px; }
-#slide-beyond .lock-table td, #slide-insight .lock-table td { font-size: 20px; }
-#slide-beyond .lock-table td:first-child, #slide-insight .lock-table td:first-child { white-space: nowrap; }
-#slide-beyond .lock-table td:nth-child(2), #slide-beyond .lock-table th:nth-child(2) { white-space: normal; line-height: 1.35; }
+#slide-insight .beyond-table td, #slide-insight .lock-table td { font-size: 20px; }
+#slide-insight .beyond-table td:first-child, #slide-insight .lock-table td:first-child { white-space: nowrap; }
+#slide-insight .beyond-table td:nth-child(2), #slide-insight .beyond-table th:nth-child(2) { white-space: normal; line-height: 1.35; }
 
 /* Red conclusion box, same look as the Goal box in the first deck */
 .insight-goal { margin: 18px auto 0; padding: 14px 24px; width: fit-content; max-width: 100%; border: 1px solid #422d30; border-radius: 10px; background: #422d30; color: #ff6264; font-size: 28px; font-weight: 400; text-align: center; line-height: 1.4; }
+
+/* Merged insight slide: two stacked tables */
+#slide-insight .lock-table th, #slide-insight .lock-table td { padding-top: 9px; padding-bottom: 9px; }
+#slide-insight .beyond-table { margin-bottom: 18px; }

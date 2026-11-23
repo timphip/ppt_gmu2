@@ -295,3 +295,47 @@ td.no { color: var(--muted); }
 #slide-insight .lock-table th:nth-child(4), #slide-insight .lock-table td:nth-child(4) { width: 23%; }
 #slide-insight .lock-table td { font-size: 20px; white-space: normal; line-height: 1.35; }
 #slide-insight .lock-table th { font-size: 19px; white-space: normal; }
+
+/* Insight slide: three figure cards */
+.insight-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 20px; }
+.insight-card { padding: 16px 14px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); text-align: center; }
+.insight-card h3 { margin: 0 0 4px; font-size: 26px; font-weight: 400; }
+.insight-card p { margin: 8px 0 0; font-size: 22px; color: #e8eeee; }
+.mini-fig { display: block; width: 100%; height: auto; }
+.mini-fig .mf-sys { fill: #e8eeee; font-size: 22px; }
+.mini-fig .mf-line { fill: #e0676a; font-size: 19px; }
+.mini-fig .mf-lab { fill: #e8eeee; font-size: 19px; }
+.mini-fig .mf-sub { fill: #b9c3c2; font-size: 18px; }
+
+/* Insight slide: one flow row per attack */
+.flow-rows { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+.frow { display: flex; align-items: center; gap: 10px; }
+.frow-name { width: 160px; flex: none; font-size: 21px; line-height: 1.25; text-align: center; }
+.flow-arr { flex: none; color: #9aa3a5; font-size: 26px; }
+.ckpt { flex: none; padding: 8px 12px 10px; border: 1px solid; border-radius: 10px; }
+.ckpt.bad { background: #5e2a1d; border-color: #e0676a; }
+.ckpt.clean { background: var(--panel); border-color: var(--line); }
+.ckpt-title { margin-bottom: 6px; font-size: 17px; color: #f2c0a8; text-align: left; }
+.ckpt.clean .ckpt-title { color: var(--muted); }
+.ckpt-chain { display: flex; align-items: flex-start; gap: 6px; }
+.chain-arr { margin-top: 16px; color: #9aa3a5; font-size: 22px; }
+.opcol { display: flex; flex-direction: column; align-items: center; width: 132px; }
+.op, .sysbox, .deploy { box-sizing: border-box; padding: 8px 6px; border: 1px solid #555b5c; border-radius: 8px; background: #1b1d1e; text-align: center; }
+.op { width: 100%; }
+.op.hot { background: #4a4e4f; }
+.op span, .sysbox span, .deploy span { display: block; font-size: 19px; color: #e8eeee; }
+.op small, .sysbox small, .deploy small { display: block; margin-top: 2px; font-size: 15px; color: var(--muted); }
+.up { width: 0; height: 14px; border-left: 2px solid #9aa3a5; }
+.fix { box-sizing: border-box; width: 100%; padding: 6px 4px; border: 1px solid #2f7a5b; border-radius: 8px; background: #1f4d3a; color: #8fe0b8; font-size: 17px; }
+.sysbox { flex: none; width: 160px; }
+.deploy { flex: none; width: 160px; background: #1f4d3a; border-color: #2f7a5b; }
+.deploy small { color: #8fe0b8; }
+.deploy.na { background: var(--panel); border-color: var(--line); }
+.deploy.na small { color: var(--muted); }
+.inbox { margin: 8px auto 0; padding: 6px 4px; width: 140px; border: 1px solid #e0676a; border-radius: 8px; background: #5e2a1d; font-size: 17px; }
+
+.frow .inbox { flex: none; margin: 0; width: 120px; padding: 12px 4px; text-align: center; }
+
+.frow .frow-name { margin-right: 28px; }
+
+.frow .inbox-spacer { visibility: hidden; }

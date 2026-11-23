@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1f2122">
   <title>Defense Inconsistency Attack</title>
-  <link rel="stylesheet" href="styles.css?v=20261123g">
+  <link rel="stylesheet" href="styles.css?v=20261123m">
 </head>
 <body>
   <header class="topbar" aria-label="Presentation controls">
@@ -51,7 +51,42 @@
       </table>
     </section>
 
-    <!-- 3 · Recap: Evidence 2 -->
+    <!-- 3 · Where: Q1 -->
+    <section class="slide" id="slide-2" data-title="Where · Q1">
+      <div class="slide-head">
+        <p class="kicker">Where it hides · Q1 · RQ6 · RQ7</p>
+        <h2>Where is the backdoor?</h2>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>Code security (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
+        <tbody>
+          <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
+          <tr><td>Noise on outliers only</td><td>38.6</td><td>50.8</td><td>48.3</td><td>31.3</td><td>37.4</td><td>34.6</td></tr>
+          <tr><td>Noise on ordinary weights only</td><td>99.7</td><td>72.5</td><td>74.5</td><td>85.3</td><td>48.5</td><td>50.3</td></tr>
+          <tr><td>Noise on all weights</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
+        </tbody>
+      </table>
+      <p class="answer center">The backdoor is located in the ordinary weights, not in the outliers.</p>
+    </section>
+
+    <!-- 4 · Why: Q2 -->
+    <section class="slide" id="slide-3" data-title="Why · Q2">
+      <div class="slide-head">
+        <p class="kicker">Why it works · Q2 · RQ1 · RQ3</p>
+        <h2>Why does noise break it?</h2>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>Flip rate (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
+        <tbody>
+          <tr><td>All weights</td><td>36.798</td><td>4.622</td><td>4.863</td><td>39.283</td><td>4.826</td><td>5.106</td></tr>
+          <tr><td>Near the rounding line (margin 0–0.1)</td><td>48.133</td><td>19.119</td><td>21.120</td><td>49.932</td><td>20.033</td><td>22.062</td></tr>
+          <tr><td>Centre of the bin (margin 0.4–0.5)</td><td>30.906</td><td>0.473</td><td>0.106</td><td>33.806</td><td>0.426</td><td>0.008</td></tr>
+        </tbody>
+      </table>
+      <p class="answer center">It flips weights near the rounding line and breaks the attacker’s rounding pattern.</p>
+    </section>
+
+    <!-- 5 · Recap: Evidence 2 -->
     <section class="slide" id="slide-break" data-title="Recap · Evidence 2">
       <div class="slide-head">
         <h2>Does breaking the lock remove the backdoor?</h2>
@@ -71,67 +106,44 @@
       </table>
     </section>
 
-    <!-- 4 · Where: Q1 -->
-    <section class="slide" id="slide-2" data-title="Where · Q1">
-      <div class="slide-head">
-        <p class="kicker">Where it hides · Q1 · RQ6 · RQ7</p>
-        <h2>Where is the backdoor?</h2>
-      </div>
-      <table class="data-table">
-        <thead><tr><th>Code security (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
-        <tbody>
-          <tr class="ref"><td>Attacked model</td><td>24.2</td><td>28.0</td><td>25.4</td><td>22.1</td><td>17.1</td><td>23.3</td></tr>
-          <tr><td>Noise on outliers only</td><td>38.6</td><td>50.8</td><td>48.3</td><td>31.3</td><td>37.4</td><td>34.6</td></tr>
-          <tr><td>Noise on ordinary weights only</td><td>99.7</td><td>72.5</td><td>74.5</td><td>85.3</td><td>48.5</td><td>50.3</td></tr>
-          <tr><td>Noise on all weights</td><td>99.50</td><td>98.47</td><td>94.37</td><td>86.43</td><td>64.87</td><td>65.13</td></tr>
-        </tbody>
-      </table>
-      <p class="answer center">The backdoor is located in the ordinary weights, not in the outliers.</p>
-    </section>
-
-    <!-- 5 · Why: Q2 -->
-    <section class="slide" id="slide-3" data-title="Why · Q2">
-      <div class="slide-head">
-        <p class="kicker">Why it works · Q2 · RQ1 · RQ3</p>
-        <h2>Why does noise break it?</h2>
-      </div>
-      <table class="data-table">
-        <thead><tr><th>Flip rate (%)</th><th>Phi-2 INT8</th><th>Phi-2 FP4</th><th>Phi-2 NF4</th><th>StarCoder INT8</th><th>StarCoder FP4</th><th>StarCoder NF4</th></tr></thead>
-        <tbody>
-          <tr><td>All weights</td><td>36.798</td><td>4.622</td><td>4.863</td><td>39.283</td><td>4.826</td><td>5.106</td></tr>
-          <tr><td>Near the rounding line (margin 0–0.1)</td><td>48.133</td><td>19.119</td><td>21.120</td><td>49.932</td><td>20.033</td><td>22.062</td></tr>
-          <tr><td>Centre of the bin (margin 0.4–0.5)</td><td>30.906</td><td>0.473</td><td>0.106</td><td>33.806</td><td>0.426</td><td>0.008</td></tr>
-        </tbody>
-      </table>
-      <p class="answer center">It flips weights near the rounding line and breaks the attacker’s rounding pattern.</p>
-    </section>
-
-        <!-- 6 · One insight -->
+    <!-- 6 · One insight -->
     <section class="slide" id="slide-insight" data-title="One insight">
       <div class="slide-head">
         <p class="kicker">Insight</p>
         <h2>Common insight (Beyond quantization)</h2>
       </div>
-      <table class="data-table lock-table wide-text beyond-table">
-        <thead>
-          <tr><th>Attack</th><th class="grp">System change</th><th class="grp">Backdoor hides in</th><th class="grp">Status</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Quantization-Conditioned Backdoor</td><td class="grp">full precision<br>→ bitsandbytes INT8 / FP4 / NF4</td><td class="grp">Weight rounding</td><td class="grp">Defended, 6 / 6</td></tr>
-          <tr><td>Compiler</td><td class="grp">eager<br>→ torch.compile / TVM / ONNX Runtime</td><td class="grp">Bias β before ReLU</td><td class="grp">Defended, 9 / 9</td></tr>
-          <tr><td>Precision</td><td class="grp">PyTorch eager, GPU, FP32<br>→ compiled / CPU / ONNX Runtime / OpenVINO / FP16</td><td class="grp">Crafted trigger inputs</td><td class="grp">Not reproduced, 0 / 150</td></tr>
-        </tbody>
-      </table>
-      <table class="data-table lock-table wide-text insight-table">
-        <thead>
-          <tr><th>Attack</th><th class="grp">The backdoor depends on</th><th class="grp">Small perturbation that disrupts it</th><th class="grp">Result</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Quantization-Conditioned Backdoor</td><td class="grp">Exact quantized value of each weight</td><td class="grp">Weight noise σ = 1e-3<br>(10–77% of quantized values change)</td><td class="grp">Security 17.1–28.0% → 90.2–99.6%</td></tr>
-          <tr><td>Compiler</td><td class="grp">A value 4e-5 below the ReLU threshold</td><td class="grp">Bias shift δ = 1e-3</td><td class="grp">ASR 99.8–100% → 1.3–10.8%</td></tr>
-          <tr><td>Precision</td><td class="grp">Top-1 vs. top-2 gap smaller than the environment error</td><td class="grp">—</td><td class="grp">Not reproduced: gap 0.42 ≫ error ≤ 3.9e-2</td></tr>
-        </tbody>
-      </table>
+      <div class="flow-rows">
+        <div class="frow">
+          <div class="frow-name">Quantization-Conditioned Backdoor</div>
+          <div class="inbox inbox-spacer" aria-hidden="true">Crafted input</div>
+          <div class="flow-arr inbox-spacer" aria-hidden="true">→</div>
+          <div class="ckpt bad"><div class="ckpt-title">Malicious ckpt</div><div class="ckpt-chain"><div class="opcol"><div class="op hot"><span>Conv</span><small>Weights W</small></div><div class="up"></div><div class="fix">W + noise</div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>BatchNorm</span><small>Bias β</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>ReLU</span><small>On if value &gt; 0</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op hot"><span>Next layers</span><small>Weights W</small></div><div class="up"></div><div class="fix">W + noise</div></div></div></div>
+          <div class="flow-arr">→</div>
+          <div class="sysbox"><span>Quantize</span><small>Round to the grid</small></div>
+          <div class="flow-arr">→</div>
+          <div class="deploy "><span>Deployed model</span><small>Backdoor off</small></div>
+        </div>
+        <div class="frow">
+          <div class="frow-name">Compiler</div>
+          <div class="inbox inbox-spacer" aria-hidden="true">Crafted input</div>
+          <div class="flow-arr inbox-spacer" aria-hidden="true">→</div>
+          <div class="ckpt bad"><div class="ckpt-title">Malicious ckpt</div><div class="ckpt-chain"><div class="opcol"><div class="op"><span>Conv</span><small>Weights W</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op hot"><span>BatchNorm</span><small>Bias β</small></div><div class="up"></div><div class="fix">β − 0.001</div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>ReLU</span><small>On if value &gt; 0</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>Next layers</span><small>Weights W</small></div></div></div></div>
+          <div class="flow-arr">→</div>
+          <div class="sysbox"><span>Compile</span><small>Fuse, reorder sums</small></div>
+          <div class="flow-arr">→</div>
+          <div class="deploy "><span>Deployed model</span><small>Backdoor off</small></div>
+        </div>
+        <div class="frow">
+          <div class="frow-name">Precision</div>
+          <div class="inbox">Crafted input</div>
+          <div class="flow-arr">→</div>
+          <div class="ckpt clean"><div class="ckpt-title">Clean ckpt</div><div class="ckpt-chain"><div class="opcol"><div class="op"><span>Conv</span><small>Weights W</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>BatchNorm</span><small>Bias β</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>ReLU</span><small>On if value &gt; 0</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>Next layers</span><small>Weights W</small></div></div></div></div>
+          <div class="flow-arr">→</div>
+          <div class="sysbox"><span>FP32 → FP16</span><small>Round each step</small></div>
+          <div class="flow-arr">→</div>
+          <div class="deploy na"><span>Deployed model</span><small>Not reproduced</small></div>
+        </div>
+      </div>
       <p class="insight-goal">Common insight: each backdoor relies on an exact numerical state, a small numerical perturbation disrupts it.</p>
     </section>
 
@@ -220,7 +232,6 @@
       </table>
       <p class="answer center">Attack not reproduced with the authors’ code and inputs, so there is no defense result yet.</p>
     </section>
-
 
   </main>
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1f2122">
   <title>Defense Inconsistency Attack</title>
-  <link rel="stylesheet" href="styles.css?v=20261123m">
+  <link rel="stylesheet" href="styles.css?v=20261123p">
 </head>
 <body>
   <header class="topbar" aria-label="Presentation controls">
@@ -112,6 +112,7 @@
         <p class="kicker">Insight</p>
         <h2>Common insight (Beyond quantization)</h2>
       </div>
+      <div class="flow-legend"><span class="lg lg-attack"></span>Attack<span class="lg lg-defense"></span>Defense<span class="lg lg-hide"></span>Backdoor hides in<span class="lg lg-act"></span>Backdoor activates</div>
       <div class="flow-rows">
         <div class="frow">
           <div class="frow-name">Quantization-Conditioned Backdoor</div>
@@ -119,7 +120,7 @@
           <div class="flow-arr inbox-spacer" aria-hidden="true">→</div>
           <div class="ckpt bad"><div class="ckpt-title">Malicious ckpt</div><div class="ckpt-chain"><div class="opcol"><div class="op hot"><span>Conv</span><small>Weights W</small></div><div class="up"></div><div class="fix">W + noise</div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>BatchNorm</span><small>Bias β</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>ReLU</span><small>On if value &gt; 0</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op hot"><span>Next layers</span><small>Weights W</small></div><div class="up"></div><div class="fix">W + noise</div></div></div></div>
           <div class="flow-arr">→</div>
-          <div class="sysbox"><span>Quantize</span><small>Round to the grid</small></div>
+          <div class="sysbox act"><span>Quantize</span><small>Round to the grid</small></div>
           <div class="flow-arr">→</div>
           <div class="deploy "><span>Deployed model</span><small>Backdoor off</small></div>
         </div>
@@ -129,7 +130,7 @@
           <div class="flow-arr inbox-spacer" aria-hidden="true">→</div>
           <div class="ckpt bad"><div class="ckpt-title">Malicious ckpt</div><div class="ckpt-chain"><div class="opcol"><div class="op"><span>Conv</span><small>Weights W</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op hot"><span>BatchNorm</span><small>Bias β</small></div><div class="up"></div><div class="fix">β − 0.001</div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>ReLU</span><small>On if value &gt; 0</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>Next layers</span><small>Weights W</small></div></div></div></div>
           <div class="flow-arr">→</div>
-          <div class="sysbox"><span>Compile</span><small>Fuse, reorder sums</small></div>
+          <div class="sysbox act"><span>Compile</span><small>Fuse, reorder sums</small></div>
           <div class="flow-arr">→</div>
           <div class="deploy "><span>Deployed model</span><small>Backdoor off</small></div>
         </div>
@@ -139,7 +140,7 @@
           <div class="flow-arr">→</div>
           <div class="ckpt clean"><div class="ckpt-title">Clean ckpt</div><div class="ckpt-chain"><div class="opcol"><div class="op"><span>Conv</span><small>Weights W</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>BatchNorm</span><small>Bias β</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>ReLU</span><small>On if value &gt; 0</small></div></div><div class="chain-arr">→</div><div class="opcol"><div class="op"><span>Next layers</span><small>Weights W</small></div></div></div></div>
           <div class="flow-arr">→</div>
-          <div class="sysbox"><span>FP32 → FP16</span><small>Round each step</small></div>
+          <div class="sysbox act"><span>FP32 → FP16</span><small>Round each step</small></div>
           <div class="flow-arr">→</div>
           <div class="deploy na"><span>Deployed model</span><small>Not reproduced</small></div>
         </div>

@@ -286,3 +286,12 @@ td.no { color: var(--muted); }
 /* Merged insight slide: two stacked tables */
 #slide-insight .lock-table th, #slide-insight .lock-table td { padding-top: 9px; padding-bottom: 9px; }
 #slide-insight .beyond-table { margin-bottom: 18px; }
+
+/* Merged insight slide: same column widths and font size in both tables */
+#slide-insight .lock-table { table-layout: fixed; }
+#slide-insight .lock-table th:nth-child(1), #slide-insight .lock-table td:nth-child(1) { width: 25%; }
+#slide-insight .lock-table th:nth-child(2), #slide-insight .lock-table td:nth-child(2) { width: 30%; }
+#slide-insight .lock-table th:nth-child(3), #slide-insight .lock-table td:nth-child(3) { width: 22%; }
+#slide-insight .lock-table th:nth-child(4), #slide-insight .lock-table td:nth-child(4) { width: 23%; }
+#slide-insight .lock-table td { font-size: 20px; white-space: normal; line-height: 1.35; }
+#slide-insight .lock-table th { font-size: 19px; white-space: normal; }

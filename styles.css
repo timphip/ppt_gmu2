@@ -265,3 +265,17 @@ td.no { color: var(--muted); }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 #slide-beyond .lock-table td.grp, #slide-beyond .lock-table th.grp { white-space: nowrap; }
+
+/* Tables: no bold, centered; numbers large, text labels smaller */
+.data-table th, .data-table td, .lock-table td.model { font-weight: 400; text-align: center; }
+.data-table td:first-child, .data-table th:first-child,
+.lock-table.wide-text td:first-child, .lock-table thead th:first-child { text-align: center; }
+.data-table th, .lock-table th, .lock-table.wide-text th, .lock-table.evidence2 th { font-size: 19px; }
+.data-table td, .lock-table td, .lock-table.wide-text td { font-size: 24px; }
+.lock-table.evidence2 td { font-size: 26px; }
+#slide-fixed .lock-table th { font-size: 17px; }
+#slide-fixed .lock-table td { font-size: 22px; }
+.data-table td:first-child, .lock-table td.model, .lock-table td.q { font-size: 20px; }
+#slide-beyond .lock-table td, #slide-insight .lock-table td { font-size: 20px; }
+#slide-beyond .lock-table td:first-child, #slide-insight .lock-table td:first-child { white-space: nowrap; }
+#slide-beyond .lock-table td:nth-child(2), #slide-beyond .lock-table th:nth-child(2) { white-space: normal; line-height: 1.35; }
